@@ -13,12 +13,14 @@ dependencies:
     sdk: flutter
   jizt_repository:
     path: packages/jizt_repository
+  flutter_bloc: ^6.1.1 # https://pub.dev/packages/flutter_bloc
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   integration_test:
     sdk: flutter
+  bloc_test: ^7.1.0 # https://pub.dev/packages/bloc_test
 
 flutter:
   uses-material-design: true
