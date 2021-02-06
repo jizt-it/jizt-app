@@ -12,13 +12,13 @@ enum SummaryStatus {
 class SummaryState {
   final SummaryStatus status;
   final String source;
-  final double jobId;
+  final String jobId;
   final String output;
 
   const SummaryState._({
     this.status = SummaryStatus.initial,
     this.source = "",
-    this.jobId = 0.0,
+    this.jobId = "",
     this.output = "",
   });
 
@@ -30,13 +30,13 @@ class SummaryState {
           source: source,
         );
 
-  const SummaryState.waitingToCheckSummaryStatus(double jobId)
+  const SummaryState.waitingToCheckSummaryStatus(String jobId)
       : this._(
           status: SummaryStatus.waitingToCheckSummaryStatus,
           jobId: jobId,
         );
 
-  const SummaryState.checkingSummaryStatus(double jobId)
+  const SummaryState.checkingSummaryStatus(String jobId)
       : this._(
           status: SummaryStatus.checkingSummaryStatus,
           jobId: jobId,

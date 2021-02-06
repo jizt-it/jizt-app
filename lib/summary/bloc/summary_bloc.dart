@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:domain/domain.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jizt_repository/jizt_repository.dart';
 
@@ -54,7 +55,7 @@ class SummaryBloc extends Bloc<SummaryEvent, SummaryState> {
     }
     yield SummaryState.checkingSummaryStatus(state.jobId);
     final summary = await _jiztRepository.getSummary(state.jobId);
-    if (summary.state == 'completed') {
+    if (summary.status == Status.completed) {
       _pollingDispatcher.stopPolling();
       yield SummaryState.success(summary.output);
     } else {

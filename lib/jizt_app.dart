@@ -23,6 +23,7 @@ class JiztApp extends StatelessWidget {
         title: 'Jizt',
         theme: lightTheme,
         darkTheme: darkTheme,
+        debugShowCheckedModeBanner: false,
       ),
     );
   }

@@ -5,9 +5,17 @@ import 'package:jizt_repository/jizt_repository.dart';
 import 'bloc_observer.dart';
 import 'jizt_app.dart';
 
-void main() {
+void main() async {
   Bloc.observer = JiztBlocObserver();
+  final jiztApiClient = JiztMockApiClient(); // TODO replace with real api
+  final jiztCacheClient = JiztCacheClientImpl(
+    box: await JiztHiveBoxProvider.getSummariesBox(),
+  );
+  final jiztRepository = JiztRepositoryImpl(
+    jiztApiClient: jiztApiClient,
+    jiztCacheClient: jiztCacheClient,
+  );
   runApp(JiztApp(
-    jiztRepository: JiztMockRepository(), // TODO replace with real repository
+    jiztRepository: jiztRepository,
   ));
 }
