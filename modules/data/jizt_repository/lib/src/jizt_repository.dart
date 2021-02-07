@@ -9,6 +9,8 @@ abstract class JiztRepository {
   Future<String> requestSummary(String source);
 
   Future<Summary> getSummary(String id);
+
+  Future<Map<String, Summary>> getAllSummaries();
 }
 
 class JiztRepositoryImpl extends JiztRepository {
@@ -44,5 +46,13 @@ class JiztRepositoryImpl extends JiztRepository {
       _jiztCacheClient.add(id, SummaryToEntityMapper().map(summary));
     }
     return summary;
+  }
+
+  @override
+  Future<Map<String, Summary>> getAllSummaries() async {
+    final mapper = SummaryFromEntityMapper();
+    return _jiztCacheClient
+        .getAll()
+        .map((key, value) => MapEntry(key, mapper.map(value)));
   }
 }

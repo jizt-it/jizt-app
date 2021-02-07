@@ -9,7 +9,7 @@ enum SummaryStatus {
   failure
 }
 
-class SummaryState {
+class SummaryState extends Equatable {
   final SummaryStatus status;
   final String source;
   final String jobId;
@@ -48,5 +48,5 @@ class SummaryState {
   const SummaryState.failure() : this._(status: SummaryStatus.failure);
 
   @override
-  String toString() => 'SummaryState {status=$status,output=$output}';
+  List<Object> get props => [status, source, jobId, output];
 }

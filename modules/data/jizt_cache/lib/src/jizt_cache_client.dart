@@ -32,7 +32,7 @@ class JiztCacheClientImpl extends JiztCacheClient {
   @override
   Map<String, SummaryEntity> getAll() {
     if (_boxIsClosed) return null;
-    return _box.toMap();
+    return _box.toMap().cast();
   }
 
   @override
