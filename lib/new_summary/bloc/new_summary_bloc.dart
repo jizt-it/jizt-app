@@ -8,11 +8,11 @@ import 'package:jizt_repository/jizt_repository.dart';
 part 'new_summary_event.dart';
 part 'new_summary_state.dart';
 
-class SummaryBloc extends Bloc<NewSummaryEvent, NewSummaryState> {
+class NewSummaryBloc extends Bloc<NewSummaryEvent, NewSummaryState> {
   final JiztRepository _jiztRepository;
   final PollingDispatcher _pollingDispatcher = PollingDispatcher();
 
-  SummaryBloc(this._jiztRepository) : super(const NewSummaryState.initial());
+  NewSummaryBloc(this._jiztRepository) : super(const NewSummaryState.initial());
 
   @override
   Stream<NewSummaryState> mapEventToState(NewSummaryEvent event) async* {
@@ -20,6 +20,8 @@ class SummaryBloc extends Bloc<NewSummaryEvent, NewSummaryState> {
       yield* _mapSourceSubmittedEventToState(event, state);
     } else if (event is CheckNewSummaryStatusEvent) {
       yield* _mapCheckNewSummaryStatusEventToState(state);
+    } else if (event is ResetEvent) {
+      yield* _mapResetEventToState(state);
     }
   }
 
@@ -62,6 +64,12 @@ class SummaryBloc extends Bloc<NewSummaryEvent, NewSummaryState> {
     } else {
       yield NewSummaryState.waitingToCheckNewSummaryStatus(state.jobId);
     }
+  }
+
+  Stream<NewSummaryState> _mapResetEventToState(
+    NewSummaryState state,
+  ) async* {
+    yield NewSummaryState.initial();
   }
 }
 

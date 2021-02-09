@@ -17,3 +17,5 @@ class SourceSubmittedEvent extends NewSummaryEvent {
 }
 
 class CheckNewSummaryStatusEvent extends NewSummaryEvent {}
+
+class ResetEvent extends NewSummaryEvent {}

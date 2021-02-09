@@ -43,7 +43,7 @@ class JiztRepositoryImpl extends JiztRepository {
     final remoteSummary = await _jiztApiClient.getSummary(id);
     final summary = SummaryFromDtoMapper().map(remoteSummary);
     if (summary.status == Status.completed) {
-      _jiztCacheClient.add(id, SummaryToEntityMapper().map(summary));
+      await _jiztCacheClient.add(id, SummaryToEntityMapper().map(summary));
     }
     return summary;
   }

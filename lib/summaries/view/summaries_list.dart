@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:jizt/summaries/bloc/summaries_bloc.dart';
+import 'package:jizt/summaries/summaries.dart';
+import 'package:jizt/summary/summary.dart';
 
 class SummariesList extends StatelessWidget {
   SummariesList({Key key}) : super(key: key);
@@ -26,9 +27,11 @@ class SummariesList extends StatelessWidget {
             padding: const EdgeInsets.all(8),
             itemCount: summariesIds.length,
             itemBuilder: (BuildContext context, int index) {
-              return Container(
-                height: 50,
-                child: Center(child: Text('${summariesIds[index]}')),
+              return ListTile(
+                title: Text('${summariesIds[index]}'),
+                onTap: () => Navigator.of(context).push<void>(
+                  SummaryPage.route(summariesIds[index]),
+                ),
               );
             },
             separatorBuilder: (BuildContext context, int index) =>

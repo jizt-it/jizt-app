@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:jizt/summaries/summaries.dart';
+import 'package:jizt/summary/summary.dart';
 import 'package:jizt_repository/jizt_repository.dart';
 
-class SummariesPage extends StatelessWidget {
-  const SummariesPage._({Key key}) : super(key: key);
+class SummaryPage extends StatelessWidget {
+  const SummaryPage._({Key key}) : super(key: key);
 
-  static Route route() {
+  static Route route(String id) {
     return MaterialPageRoute<void>(
       builder: (_) => BlocProvider(
-        create: (context) => SummariesBloc(
+        create: (context) => SummaryBloc(
           context.read<JiztRepository>(),
-        )..add(LoadSummariesEvent()),
-        child: const SummariesPage._(),
+        )..add(LoadSummaryEvent(id)),
+        child: const SummaryPage._(),
       ),
     );
   }
@@ -22,9 +22,12 @@ class SummariesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Summaries'),
+        title: Text('Summary'),
       ),
-      body: SummariesList(),
+      body: Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: SummaryContent(),
+      ),
     );
   }
 }
