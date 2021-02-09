@@ -8,10 +8,12 @@ part of 'summary_dto.dart';
 
 SummaryDto _$SummaryDtoFromJson(Map<String, dynamic> json) {
   return SummaryDto(
-    json['startedAt'] == null
+    json['started_at'] == null
         ? null
-        : DateTime.parse(json['startedAt'] as String),
-    json['endedAt'] == null ? null : DateTime.parse(json['endedAt'] as String),
+        : DateTime.parse(json['started_at'] as String),
+    json['ended_at'] == null
+        ? null
+        : DateTime.parse(json['ended_at'] as String),
     json['status'] as String,
     json['output'] as String,
   );

@@ -36,7 +36,7 @@ class NewSummaryBloc extends Bloc<NewSummaryEvent, NewSummaryState> {
     yield NewSummaryState.requestingSummary(event.source);
     try {
       final jobId = await _jiztRepository.requestSummary(event.source);
-      yield NewSummaryState.waitingToCheckNewSummaryStatus(jobId);
+      yield NewSummaryState.waitingToCheckNewSummaryStatus(event.source, jobId);
       _pollingDispatcher.startPolling((count) {
         add(CheckNewSummaryStatusEvent());
       });
@@ -56,13 +56,16 @@ class NewSummaryBloc extends Bloc<NewSummaryEvent, NewSummaryState> {
     if (state.status == NewSummaryStatus.checkingNewSummaryStatus) {
       return; // Already checking status
     }
-    yield NewSummaryState.checkingNewSummaryStatus(state.jobId);
+    yield NewSummaryState.checkingNewSummaryStatus(state.source, state.jobId);
     final summary = await _jiztRepository.getSummary(state.jobId);
     if (summary.status == Status.completed) {
       _pollingDispatcher.stopPolling();
-      yield NewSummaryState.success(summary.output);
+      yield NewSummaryState.success(state.source, state.jobId);
     } else {
-      yield NewSummaryState.waitingToCheckNewSummaryStatus(state.jobId);
+      yield NewSummaryState.waitingToCheckNewSummaryStatus(
+        state.source,
+        state.jobId,
+      );
     }
   }
 

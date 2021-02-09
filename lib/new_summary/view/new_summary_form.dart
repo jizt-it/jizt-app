@@ -20,9 +20,8 @@ class _NewSummaryFormState extends State<NewSummaryForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
+    return ListView(
+      children: [
         Text(
           'Input:',
           style: Theme.of(context).textTheme.subtitle1,

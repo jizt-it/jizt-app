@@ -15,3 +15,5 @@ class LoadSummaryEvent extends SummaryEvent {
   @override
   List<Object> get props => [id];
 }
+
+class DeleteSummaryEvent extends SummaryEvent {}

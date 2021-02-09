@@ -11,6 +11,8 @@ abstract class JiztRepository {
   Future<Summary> getSummary(String id);
 
   Future<Map<String, Summary>> getAllSummaries();
+
+  Future<void> deleteSummary(String id);
 }
 
 class JiztRepositoryImpl extends JiztRepository {
@@ -43,7 +45,7 @@ class JiztRepositoryImpl extends JiztRepository {
     final remoteSummary = await _jiztApiClient.getSummary(id);
     final summary = SummaryFromDtoMapper().map(remoteSummary);
     if (summary.status == Status.completed) {
-      await _jiztCacheClient.add(id, SummaryToEntityMapper().map(summary));
+      _jiztCacheClient.add(id, SummaryToEntityMapper().map(summary));
     }
     return summary;
   }
@@ -54,5 +56,10 @@ class JiztRepositoryImpl extends JiztRepository {
     return _jiztCacheClient
         .getAll()
         .map((key, value) => MapEntry(key, mapper.map(value)));
+  }
+
+  @override
+  Future<void> deleteSummary(String id) {
+    return _jiztCacheClient.delete(id);
   }
 }

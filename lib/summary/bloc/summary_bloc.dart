@@ -17,6 +17,8 @@ class SummaryBloc extends Bloc<SummaryEvent, SummaryState> {
   Stream<SummaryState> mapEventToState(SummaryEvent event) async* {
     if (event is LoadSummaryEvent) {
       yield* _mapLoadSummaryEventToState(event, state);
+    } else if (event is DeleteSummaryEvent) {
+      yield* _mapDeleteSummaryEventToState(event, state);
     }
   }
 
@@ -26,9 +28,24 @@ class SummaryBloc extends Bloc<SummaryEvent, SummaryState> {
   ) async* {
     try {
       final summary = await _jiztRepository.getSummary(event.id);
-      yield SummaryLoadSuccessState(summary);
+      yield SummaryLoadSuccessState(event.id, summary);
     } catch (_) {
       yield SummaryLoadFailureState();
+    }
+  }
+
+  Stream<SummaryState> _mapDeleteSummaryEventToState(
+    DeleteSummaryEvent event,
+    SummaryState state,
+  ) async* {
+    if (state is SummaryLoadSuccessState) {
+      try {
+        await _jiztRepository.deleteSummary(state.id);
+        yield SummaryRemovedState();
+      } catch (e) {
+        print(e);
+        yield SummaryLoadFailureState();
+      }
     }
   }
 }

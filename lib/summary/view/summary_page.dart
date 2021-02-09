@@ -23,6 +23,16 @@ class SummaryPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Summary'),
+        actions: [
+          IconButton(
+            tooltip: 'Delete summary',
+            icon: Icon(Icons.delete),
+            onPressed: () {
+              context.read<SummaryBloc>().add(DeleteSummaryEvent());
+              Navigator.pop(context);
+            },
+          )
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(24.0),

@@ -9,6 +9,8 @@ abstract class JiztCacheClient {
 
   Map<String, SummaryEntity> getAll();
 
+  Future<void> delete(String summaryId);
+
   Future<void> clear();
 }
 
@@ -33,6 +35,12 @@ class JiztCacheClientImpl extends JiztCacheClient {
   Map<String, SummaryEntity> getAll() {
     if (_boxIsClosed) return null;
     return _box.toMap().cast();
+  }
+
+  @override
+  Future<void> delete(String summaryId) {
+    if (_boxIsClosed) return null;
+    return _box.delete(summaryId);
   }
 
   @override

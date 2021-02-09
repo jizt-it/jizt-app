@@ -25,9 +25,16 @@ class SummaryContent extends StatelessWidget {
           return ListView(
             padding: const EdgeInsets.all(8),
             children: [
-              Text('Summary:'),
+              Text(
+                'Summary:',
+                style: Theme.of(context).textTheme.subtitle1,
+              ),
               Text('${summary.output}'),
-              Text('Created:'),
+              SizedBox(height: 16),
+              Text(
+                'Created:',
+                style: Theme.of(context).textTheme.subtitle1,
+              ),
               Text('${summary.startedAt}'),
             ],
           );

@@ -16,14 +16,14 @@ class JiztApiClientImpl extends JiztApiClient {
   JiztApiClientImpl({http.Client httpClient})
       : _httpClient = httpClient ?? http.Client();
 
-  static const _baseUrl = ' api.jizt.it';
+  static const _baseUrl = 'api.jizt.it';
 
   final http.Client _httpClient;
 
   /// POST /v1/summaries/plain-text
   @override
   Future<SummaryJobDto> requestSummary(SummaryRequestDto request) async {
-    final uri = Uri.http(_baseUrl, '/v1/summaries/plain-text');
+    final uri = Uri.https(_baseUrl, '/v1/summaries/plain-text');
 
     http.Response response;
     try {
@@ -33,7 +33,7 @@ class JiztApiClientImpl extends JiztApiClient {
     } on Exception {
       throw HttpException();
     }
-
+    print('<- ${response.statusCode} POST ${uri.toString()}\n${response.body}');
     if (response.statusCode != 202) {
       throw HttpRequestFailure(response.statusCode);
     }
@@ -44,14 +44,14 @@ class JiztApiClientImpl extends JiztApiClient {
   /// GET /v1/summaries/plain-text/{id}
   @override
   Future<SummaryDto> getSummary(String id) async {
-    final uri = Uri.http(_baseUrl, '/v1/summaries/plain-text/$id');
+    final uri = Uri.https(_baseUrl, '/v1/summaries/plain-text/$id');
     http.Response response;
     try {
       response = await _httpClient.get(uri);
     } on Exception {
       throw HttpException();
     }
-
+    print('<- ${response.statusCode} GET ${uri.toString()}\n${response.body}');
     if (response.statusCode != 200) {
       throw HttpRequestFailure(response.statusCode);
     }
