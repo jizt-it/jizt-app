@@ -5,62 +5,62 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jizt_repository/jizt_repository.dart';
 
-part 'summary_event.dart';
-part 'summary_state.dart';
+part 'new_summary_event.dart';
+part 'new_summary_state.dart';
 
-class SummaryBloc extends Bloc<SummaryEvent, SummaryState> {
+class SummaryBloc extends Bloc<NewSummaryEvent, NewSummaryState> {
   final JiztRepository _jiztRepository;
   final PollingDispatcher _pollingDispatcher = PollingDispatcher();
 
-  SummaryBloc(this._jiztRepository) : super(const SummaryState.initial());
+  SummaryBloc(this._jiztRepository) : super(const NewSummaryState.initial());
 
   @override
-  Stream<SummaryState> mapEventToState(SummaryEvent event) async* {
+  Stream<NewSummaryState> mapEventToState(NewSummaryEvent event) async* {
     if (event is SourceSubmittedEvent) {
       yield* _mapSourceSubmittedEventToState(event, state);
-    } else if (event is CheckSummaryStatusEvent) {
-      yield* _mapCheckSummaryStatusEventToState(state);
+    } else if (event is CheckNewSummaryStatusEvent) {
+      yield* _mapCheckNewSummaryStatusEventToState(state);
     }
   }
 
-  Stream<SummaryState> _mapSourceSubmittedEventToState(
+  Stream<NewSummaryState> _mapSourceSubmittedEventToState(
     SourceSubmittedEvent event,
-    SummaryState state,
+    NewSummaryState state,
   ) async* {
-    if (state.status != SummaryStatus.initial || event.source.isEmpty) {
-      yield const SummaryState.initial();
+    if (state.status != NewSummaryStatus.initial || event.source.isEmpty) {
+      yield const NewSummaryState.initial();
       return;
     }
-    yield SummaryState.requestingSummary(event.source);
+    yield NewSummaryState.requestingSummary(event.source);
     try {
       final jobId = await _jiztRepository.requestSummary(event.source);
-      yield SummaryState.waitingToCheckSummaryStatus(jobId);
+      yield NewSummaryState.waitingToCheckNewSummaryStatus(jobId);
       _pollingDispatcher.startPolling((count) {
-        add(CheckSummaryStatusEvent());
+        add(CheckNewSummaryStatusEvent());
       });
     } on Exception {
-      yield const SummaryState.failure();
+      yield const NewSummaryState.failure();
     }
   }
 
-  Stream<SummaryState> _mapCheckSummaryStatusEventToState(
-    SummaryState state,
+  Stream<NewSummaryState> _mapCheckNewSummaryStatusEventToState(
+    NewSummaryState state,
   ) async* {
-    if (state.status != SummaryStatus.waitingToCheckSummaryStatus &&
-        state.status != SummaryStatus.checkingSummaryStatus) {
+    if (state.status != NewSummaryStatus.waitingToCheckNewSummaryStatus &&
+        state.status != NewSummaryStatus.checkingNewSummaryStatus) {
       _pollingDispatcher.stopPolling();
       return;
     }
-    if (state.status == SummaryStatus.checkingSummaryStatus) {
+    if (state.status == NewSummaryStatus.checkingNewSummaryStatus) {
       return; // Already checking status
     }
-    yield SummaryState.checkingSummaryStatus(state.jobId);
+    yield NewSummaryState.checkingNewSummaryStatus(state.jobId);
     final summary = await _jiztRepository.getSummary(state.jobId);
     if (summary.status == Status.completed) {
       _pollingDispatcher.stopPolling();
-      yield SummaryState.success(summary.output);
+      yield NewSummaryState.success(summary.output);
     } else {
-      yield SummaryState.waitingToCheckSummaryStatus(state.jobId);
+      yield NewSummaryState.waitingToCheckNewSummaryStatus(state.jobId);
     }
   }
 }

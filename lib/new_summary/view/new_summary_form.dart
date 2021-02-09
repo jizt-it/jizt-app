@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:jizt/summary/bloc/summary_bloc.dart';
+import 'package:jizt/new_summary/new_summary.dart';
 
-class SummaryForm extends StatefulWidget {
+class NewSummaryForm extends StatefulWidget {
   @override
-  _SummaryFormState createState() => _SummaryFormState();
+  _NewSummaryFormState createState() => _NewSummaryFormState();
 }
 
-class _SummaryFormState extends State<SummaryForm> {
+class _NewSummaryFormState extends State<NewSummaryForm> {
   final _textEditingController = TextEditingController();
 
   @override
@@ -35,10 +35,10 @@ class _SummaryFormState extends State<SummaryForm> {
         ),
         SizedBox(height: 64),
         Text('Summary:'),
-        BlocConsumer<SummaryBloc, SummaryState>(
+        BlocConsumer<SummaryBloc, NewSummaryState>(
           listenWhen: (previous, current) => previous.status != current.status,
           listener: (context, state) {
-            if (state.status == SummaryStatus.failure) {
+            if (state.status == NewSummaryStatus.failure) {
               ScaffoldMessenger.of(context)
                 ..hideCurrentSnackBar()
                 ..showSnackBar(
@@ -48,11 +48,11 @@ class _SummaryFormState extends State<SummaryForm> {
           },
           builder: (context, state) {
             switch (state.status) {
-              case SummaryStatus.requestingSummary:
-              case SummaryStatus.waitingToCheckSummaryStatus:
-              case SummaryStatus.checkingSummaryStatus:
+              case NewSummaryStatus.requestingSummary:
+              case NewSummaryStatus.waitingToCheckNewSummaryStatus:
+              case NewSummaryStatus.checkingNewSummaryStatus:
                 return Text('Creating summary...');
-              case SummaryStatus.success:
+              case NewSummaryStatus.success:
                 return Text('${state.output}');
               default:
                 return Text('Insert the text you want to summarize...');

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jizt/new_summary/new_summary.dart';
 import 'package:jizt/summaries/summaries.dart';
-import 'package:jizt/summary/bloc/summary_bloc.dart';
-import 'package:jizt/summary/view/summary_form.dart';
 import 'package:jizt_repository/jizt_repository.dart';
 
-class SummaryPage extends StatelessWidget {
-  SummaryPage({Key key}) : super(key: key);
+class NewSummaryPage extends StatelessWidget {
+  NewSummaryPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +31,7 @@ class SummaryPage extends StatelessWidget {
           create: (context) => SummaryBloc(
             context.read<JiztRepository>(),
           ),
-          child: SummaryForm(),
+          child: NewSummaryForm(),
         ),
       ),
     );
