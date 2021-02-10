@@ -7,7 +7,7 @@ import 'parser/json_parser.dart';
 
 /// A Dart API Client for the Jizt REST API.
 abstract class JiztApiClient {
-  Future<SummaryJobDto> requestSummary(SummaryRequestDto request);
+  Future<SummaryIdDto> requestSummary(SummaryRequestDto request);
 
   Future<SummaryDto> getSummary(String id);
 }
@@ -22,7 +22,7 @@ class JiztApiClientImpl extends JiztApiClient {
 
   /// POST /v1/summaries/plain-text
   @override
-  Future<SummaryJobDto> requestSummary(SummaryRequestDto request) async {
+  Future<SummaryIdDto> requestSummary(SummaryRequestDto request) async {
     final uri = Uri.https(_baseUrl, '/v1/summaries/plain-text');
 
     http.Response response;
@@ -38,7 +38,7 @@ class JiztApiClientImpl extends JiztApiClient {
       throw HttpRequestFailure(response.statusCode);
     }
 
-    return SummaryJobParser().parseFromJson(response.body);
+    return SummaryIdParser().parseFromJson(response.body);
   }
 
   /// GET /v1/summaries/plain-text/{id}

@@ -12,12 +12,12 @@ enum NewSummaryStatus {
 class NewSummaryState extends Equatable {
   final NewSummaryStatus status;
   final String source;
-  final String jobId;
+  final String summaryId;
 
   const NewSummaryState._({
     this.status = NewSummaryStatus.initial,
     this.source = "",
-    this.jobId = "",
+    this.summaryId = "",
   });
 
   const NewSummaryState.initial() : this._();
@@ -29,29 +29,30 @@ class NewSummaryState extends Equatable {
         );
 
   const NewSummaryState.waitingToCheckNewSummaryStatus(
-      String source, String jobId)
+      String source, String summaryId)
       : this._(
           status: NewSummaryStatus.waitingToCheckNewSummaryStatus,
           source: source,
-          jobId: jobId,
+          summaryId: summaryId,
         );
 
-  const NewSummaryState.checkingNewSummaryStatus(String source, String jobId)
+  const NewSummaryState.checkingNewSummaryStatus(
+      String source, String summaryId)
       : this._(
           status: NewSummaryStatus.checkingNewSummaryStatus,
           source: source,
-          jobId: jobId,
+          summaryId: summaryId,
         );
 
-  const NewSummaryState.success(String source, String jobId)
+  const NewSummaryState.success(String source, String summaryId)
       : this._(
           status: NewSummaryStatus.success,
           source: source,
-          jobId: jobId,
+          summaryId: summaryId,
         );
 
   const NewSummaryState.failure() : this._(status: NewSummaryStatus.failure);
 
   @override
-  List<Object> get props => [status, source, jobId];
+  List<Object> get props => [status, source, summaryId];
 }

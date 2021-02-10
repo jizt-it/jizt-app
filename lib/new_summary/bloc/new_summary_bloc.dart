@@ -41,15 +41,16 @@ class NewSummaryCubit extends Cubit<NewSummaryState> {
     if (state.status == NewSummaryStatus.checkingNewSummaryStatus) {
       return; // Already checking status
     }
-    emit(NewSummaryState.checkingNewSummaryStatus(state.source, state.jobId));
-    final summary = await _jiztRepository.getSummary(state.jobId);
+    emit(NewSummaryState.checkingNewSummaryStatus(
+        state.source, state.summaryId));
+    final summary = await _jiztRepository.getSummary(state.summaryId);
     if (summary.status == Status.completed) {
       pollerSubscription.cancel();
-      emit(NewSummaryState.success(state.source, state.jobId));
+      emit(NewSummaryState.success(state.source, state.summaryId));
     } else {
       emit(NewSummaryState.waitingToCheckNewSummaryStatus(
         state.source,
-        state.jobId,
+        state.summaryId,
       ));
     }
   }

@@ -10,7 +10,7 @@ import 'utils/bloc_observer.dart';
 void main() async {
   EquatableConfig.stringify = kDebugMode;
   Bloc.observer = JiztBlocObserver();
-  final jiztApiClient = JiztMockApiClient(); // TODO revert
+  final jiztApiClient = JiztApiClientImpl();
   final jiztCacheClient = JiztCacheClientImpl(
     box: await JiztHiveBoxProvider.getSummariesBox(),
   );

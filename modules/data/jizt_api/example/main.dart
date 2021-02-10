@@ -7,11 +7,11 @@ void main() async {
   final jiztApi = JiztApiClientImpl();
 
   try {
-    final job = await jiztApi.requestSummary(
+    final id = await jiztApi.requestSummary(
       SummaryRequestDto(source: 'Hello World!'),
     );
-    print("Job id: ${job.jobId}");
-    final summary = await jiztApi.getSummary(job.jobId);
+    print("Summary id: ${id.summaryId}");
+    final summary = await jiztApi.getSummary(id.summaryId);
     print("Summary: ${summary.output}");
   } on Exception catch (e) {
     print('Error: $e');

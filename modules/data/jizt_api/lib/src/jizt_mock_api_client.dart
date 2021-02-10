@@ -5,8 +5,8 @@ import 'package:jizt_api/jizt_api.dart';
 /// A Dart Mock API Client for the Jizt REST API.
 class JiztMockApiClient extends JiztApiClient {
   @override
-  Future<SummaryJobDto> requestSummary(SummaryRequestDto request) async {
-    return SummaryJobDto(jobId: Random().nextDouble().toString());
+  Future<SummaryIdDto> requestSummary(SummaryRequestDto request) async {
+    return SummaryIdDto(summaryId: Random().nextDouble().toString());
   }
 
   int _count = 0;
@@ -19,7 +19,7 @@ class JiztMockApiClient extends JiztApiClient {
         DateTime.now(),
         DateTime.now(),
         _count == 3 ? 'completed' : 'pending',
-        _count == 3 ? 'This is the summary of the job $id' : '',
+        _count == 3 ? 'This is the summary with id = $id' : '',
       );
     });
   }

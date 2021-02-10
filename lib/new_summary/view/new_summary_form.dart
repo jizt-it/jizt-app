@@ -51,7 +51,7 @@ class _NewSummaryFormState extends State<NewSummaryForm> {
           listenWhen: (previous, current) => previous.status != current.status,
           listener: (context, state) {
             if (state.status == NewSummaryStatus.success) {
-              onSummarySuccess(state.jobId);
+              onSummarySuccess(state.summaryId);
             } else if (state.status == NewSummaryStatus.failure) {
               onSummaryFailure();
             }

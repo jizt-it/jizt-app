@@ -29,10 +29,10 @@ class JiztRepositoryImpl extends JiztRepository {
 
   @override
   Future<String> requestSummary(String source) async {
-    final job = await _jiztApiClient.requestSummary(
+    final id = await _jiztApiClient.requestSummary(
       SummaryRequestDto(source: source),
     );
-    return job.jobId;
+    return id.summaryId;
   }
 
   @override
