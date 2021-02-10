@@ -8,3 +8,12 @@ abstract class SummariesEvent extends Equatable {
 }
 
 class LoadSummariesEvent extends SummariesEvent {}
+
+class SummariesReceivedEvent extends SummariesEvent {
+  final Map<String, Summary> summaries;
+
+  SummariesReceivedEvent(this.summaries);
+
+  @override
+  List<Object> get props => [summaries];
+}

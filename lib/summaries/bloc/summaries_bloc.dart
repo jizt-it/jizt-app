@@ -10,6 +10,7 @@ part 'summaries_state.dart';
 
 class SummariesBloc extends Bloc<SummariesEvent, SummariesState> {
   final JiztRepository _jiztRepository;
+  StreamSubscription<Map<String, Summary>> summariesSubscription;
 
   SummariesBloc(this._jiztRepository) : super(SummariesLoadInProgressState());
 
@@ -17,6 +18,8 @@ class SummariesBloc extends Bloc<SummariesEvent, SummariesState> {
   Stream<SummariesState> mapEventToState(SummariesEvent event) async* {
     if (event is LoadSummariesEvent) {
       yield* _mapLoadSummariesEventToState(event, state);
+    } else if (event is SummariesReceivedEvent) {
+      yield* _mapSummariesReceivedEventToState(event, state);
     }
   }
 
@@ -24,11 +27,22 @@ class SummariesBloc extends Bloc<SummariesEvent, SummariesState> {
     LoadSummariesEvent event,
     SummariesState state,
   ) async* {
-    try {
-      final summaries = await _jiztRepository.getAllSummaries();
-      yield SummariesLoadSuccessState(summaries);
-    } catch (_) {
-      yield SummariesLoadFailureState();
-    }
+    summariesSubscription =
+        _jiztRepository.streamAllSummaries().listen((summaries) {
+      add(SummariesReceivedEvent(summaries));
+    });
+  }
+
+  Stream<SummariesState> _mapSummariesReceivedEventToState(
+    SummariesReceivedEvent event,
+    SummariesState state,
+  ) async* {
+    yield SummariesLoadSuccessState(event.summaries);
+  }
+
+  @override
+  Future<void> close() {
+    summariesSubscription.cancel();
+    return super.close();
   }
 }
