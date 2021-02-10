@@ -17,25 +17,31 @@ class SummaryEntityAdapter extends TypeAdapter<SummaryEntity> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return SummaryEntity(
-      startedAt: fields[0] as DateTime,
-      endedAt: fields[1] as DateTime,
+      id: fields[0] as String,
+      source: fields[1] as String,
       status: fields[2] as String,
       output: fields[3] as String,
+      startedAt: fields[4] as DateTime,
+      endedAt: fields[5] as DateTime,
     );
   }
 
   @override
   void write(BinaryWriter writer, SummaryEntity obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(6)
       ..writeByte(0)
-      ..write(obj.startedAt)
+      ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.endedAt)
+      ..write(obj.source)
       ..writeByte(2)
       ..write(obj.status)
       ..writeByte(3)
-      ..write(obj.output);
+      ..write(obj.output)
+      ..writeByte(4)
+      ..write(obj.startedAt)
+      ..writeByte(5)
+      ..write(obj.endedAt);
   }
 
   @override

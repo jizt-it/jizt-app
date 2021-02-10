@@ -1,10 +1,18 @@
 class Summary {
-  final DateTime startedAt;
-  final DateTime endedAt;
+  final String id;
+  final String source;
   final Status status;
   final String output;
+  final DateTime startedAt;
+  final DateTime endedAt;
 
-  Summary({this.startedAt, this.endedAt, this.status, this.output});
+  Summary(
+      {this.id,
+      this.source,
+      this.status,
+      this.output,
+      this.startedAt,
+      this.endedAt});
 }
 
 enum Status { preprocessing, completed, unknown }

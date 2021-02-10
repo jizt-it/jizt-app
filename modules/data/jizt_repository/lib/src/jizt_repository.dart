@@ -1,9 +1,9 @@
 import 'package:domain/domain.dart';
 import 'package:jizt_api/jizt_api.dart';
 import 'package:jizt_cache/jizt_cache.dart';
-import 'package:jizt_repository/src/mapper/dto/SummaryFromDtoMapper.dart';
-import 'package:jizt_repository/src/mapper/entity/SummaryFromEntityMapper.dart';
-import 'package:jizt_repository/src/mapper/entity/SummaryToEntityMapper.dart';
+import 'package:jizt_repository/src/mapper/dto/SummaryDtoToModelMapper.dart';
+import 'package:jizt_repository/src/mapper/entity/SummaryEntityToModelMapper.dart';
+import 'package:jizt_repository/src/mapper/entity/SummaryModelToEntityMapper.dart';
 
 abstract class JiztRepository {
   Future<String> requestSummary(String source);
@@ -29,32 +29,44 @@ class JiztRepositoryImpl extends JiztRepository {
 
   @override
   Future<String> requestSummary(String source) async {
-    final id = await _jiztApiClient.requestSummary(
+    final response = await _jiztApiClient.requestSummary(
       SummaryRequestDto(source: source),
     );
-    return id.summaryId;
+    // Cache summary
+    _jiztCacheClient.add(
+      response.summaryId,
+      SummaryEntity(id: response.summaryId, source: source),
+    );
+    return response.summaryId;
   }
 
   @override
   Future<Summary> getSummary(String id) async {
-    // Return cached data if exists
-    final cachedSummary = _jiztCacheClient.get(id);
-    if (cachedSummary != null) {
+    final summaryEntity = _jiztCacheClient.get(id);
+    if (summaryEntity == null) throw Exception('Unknown summary id');
+    // Return cached data if summary is completed
+    final cachedSummary = SummaryEntityToModelMapper().map(summaryEntity);
+    if (cachedSummary.status == Status.completed) {
       print('getSummary(): cache hit');
-      return SummaryFromEntityMapper().map(cachedSummary);
+      return cachedSummary;
     }
     // Otherwise, fetch from backend
-    final remoteSummary = await _jiztApiClient.getSummary(id);
-    final summary = SummaryFromDtoMapper().map(remoteSummary);
+    final summaryDto = await _jiztApiClient.getSummary(id);
+    final summary = SummaryDtoToModelMapper().map(SummaryDtoWrapper(
+      id: id,
+      source: cachedSummary.source,
+      summaryDto: summaryDto,
+    ));
+    // Update cache if completed
     if (summary.status == Status.completed) {
-      _jiztCacheClient.add(id, SummaryToEntityMapper().map(summary));
+      _jiztCacheClient.add(id, SummaryModelToEntityMapper().map(summary));
     }
     return summary;
   }
 
   @override
   Future<Map<String, Summary>> getAllSummaries() async {
-    final mapper = SummaryFromEntityMapper();
+    final mapper = SummaryEntityToModelMapper();
     return _jiztCacheClient
         .getAll()
         .map((key, value) => MapEntry(key, mapper.map(value)));
@@ -62,7 +74,7 @@ class JiztRepositoryImpl extends JiztRepository {
 
   @override
   Stream<Map<String, Summary>> streamAllSummaries() {
-    final mapper = SummaryFromEntityMapper();
+    final mapper = SummaryEntityToModelMapper();
     return _jiztCacheClient.streamAll().map((summariesMap) =>
         summariesMap.map((key, value) => MapEntry(key, mapper.map(value))));
   }

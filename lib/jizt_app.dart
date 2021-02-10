@@ -22,7 +22,7 @@ class JiztApp extends StatelessWidget {
         home: NewSummaryPage(),
         title: 'Jizt',
         theme: lightTheme,
-        darkTheme: darkTheme,
+        // darkTheme: darkTheme, // TODO add dark theme later
         debugShowCheckedModeBanner: false,
       ),
     );

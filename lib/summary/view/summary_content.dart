@@ -32,6 +32,12 @@ class SummaryContent extends StatelessWidget {
               Text('${summary.output}'),
               SizedBox(height: 16),
               Text(
+                'Original:',
+                style: Theme.of(context).textTheme.subtitle1,
+              ),
+              Text('${summary.source}'),
+              SizedBox(height: 16),
+              Text(
                 'Created:',
                 style: Theme.of(context).textTheme.subtitle1,
               ),

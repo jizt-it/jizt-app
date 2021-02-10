@@ -5,13 +5,24 @@ part 'summary_entity.g.dart';
 @HiveType(typeId: 0)
 class SummaryEntity extends HiveObject {
   @HiveField(0)
-  final DateTime startedAt;
+  final String id;
   @HiveField(1)
-  final DateTime endedAt;
+  final String source;
   @HiveField(2)
   final String status;
   @HiveField(3)
   final String output;
+  @HiveField(4)
+  final DateTime startedAt;
+  @HiveField(5)
+  final DateTime endedAt;
 
-  SummaryEntity({this.startedAt, this.endedAt, this.status, this.output});
+  SummaryEntity({
+    this.id,
+    this.source,
+    this.status,
+    this.output,
+    this.startedAt,
+    this.endedAt,
+  });
 }

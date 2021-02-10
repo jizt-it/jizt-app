@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jizt/utils/poller.dart';
 import 'package:jizt_repository/jizt_repository.dart';
 
-part 'new_summary_event.dart';
 part 'new_summary_state.dart';
 
 class NewSummaryCubit extends Cubit<NewSummaryState> {
