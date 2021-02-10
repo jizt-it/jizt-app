@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jizt_repository/jizt_repository.dart';
 
-import 'bloc_observer.dart';
 import 'jizt_app.dart';
+import 'utils/bloc_observer.dart';
 
 void main() async {
   EquatableConfig.stringify = kDebugMode;
   Bloc.observer = JiztBlocObserver();
-  final jiztApiClient = JiztApiClientImpl();
+  final jiztApiClient = JiztMockApiClient(); // TODO revert
   final jiztCacheClient = JiztCacheClientImpl(
     box: await JiztHiveBoxProvider.getSummariesBox(),
   );

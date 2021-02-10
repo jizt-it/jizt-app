@@ -35,8 +35,8 @@ class _NewSummaryFormState extends State<NewSummaryForm> {
         SizedBox(height: 64),
         ElevatedButton(
           onPressed: () {
-            context.read<NewSummaryBloc>().add(
-                  SourceSubmittedEvent(_textEditingController.text),
+            context.read<NewSummaryCubit>().requestNewSummary(
+                  _textEditingController.text,
                 );
             FocusManager.instance.primaryFocus.unfocus();
           },
@@ -47,7 +47,7 @@ class _NewSummaryFormState extends State<NewSummaryForm> {
           'Status:',
           style: Theme.of(context).textTheme.subtitle1,
         ),
-        BlocConsumer<NewSummaryBloc, NewSummaryState>(
+        BlocConsumer<NewSummaryCubit, NewSummaryState>(
           listenWhen: (previous, current) => previous.status != current.status,
           listener: (context, state) {
             if (state.status == NewSummaryStatus.success) {
@@ -80,7 +80,7 @@ class _NewSummaryFormState extends State<NewSummaryForm> {
     );
     await Future.delayed(Duration(seconds: 1));
     _textEditingController.clear();
-    context.read<NewSummaryBloc>().add(ResetEvent());
+    context.read<NewSummaryCubit>().reset();
   }
 
   void onSummaryFailure() {

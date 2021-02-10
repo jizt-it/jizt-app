@@ -1,4 +1,4 @@
-part of 'summaries_bloc.dart';
+part of 'summaries_cubit.dart';
 
 abstract class SummariesState extends Equatable {
   const SummariesState();

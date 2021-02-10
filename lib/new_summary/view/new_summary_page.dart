@@ -28,7 +28,7 @@ class NewSummaryPage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(24.0),
         child: BlocProvider(
-          create: (context) => NewSummaryBloc(
+          create: (context) => NewSummaryCubit(
             context.read<JiztRepository>(),
           ),
           child: NewSummaryForm(),
