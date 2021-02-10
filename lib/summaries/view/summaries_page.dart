@@ -10,9 +10,9 @@ class SummariesPage extends StatelessWidget {
   static Route route() {
     return MaterialPageRoute<void>(
       builder: (_) => BlocProvider(
-        create: (context) => SummariesBloc(
+        create: (context) => SummariesCubit(
           context.read<JiztRepository>(),
-        )..add(LoadSummariesEvent()),
+        )..loadSummaries(),
         child: const SummariesPage._(),
       ),
     );
