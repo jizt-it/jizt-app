@@ -8,7 +8,7 @@ class SummaryContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<SummaryBloc, SummaryState>(
+    return BlocConsumer<SummaryCubit, SummaryState>(
       listenWhen: (previous, current) => previous != current,
       listener: (context, state) {
         if (state is SummaryLoadFailureState) {

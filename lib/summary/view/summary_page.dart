@@ -10,9 +10,9 @@ class SummaryPage extends StatelessWidget {
   static Route route(String id) {
     return MaterialPageRoute<void>(
       builder: (_) => BlocProvider(
-        create: (context) => SummaryBloc(
+        create: (context) => SummaryCubit(
           context.read<JiztRepository>(),
-        )..add(LoadSummaryEvent(id)),
+        )..loadSummary(id),
         child: const SummaryPage._(),
       ),
     );
@@ -28,7 +28,7 @@ class SummaryPage extends StatelessWidget {
             tooltip: 'Delete summary',
             icon: Icon(Icons.delete),
             onPressed: () {
-              context.read<SummaryBloc>().add(DeleteSummaryEvent());
+              context.read<SummaryCubit>()..deleteSummary();
               Navigator.pop(context);
             },
           )

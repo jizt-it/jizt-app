@@ -5,46 +5,32 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jizt_repository/jizt_repository.dart';
 
-part 'summary_event.dart';
 part 'summary_state.dart';
 
-class SummaryBloc extends Bloc<SummaryEvent, SummaryState> {
+class SummaryCubit extends Cubit<SummaryState> {
   final JiztRepository _jiztRepository;
 
-  SummaryBloc(this._jiztRepository) : super(SummaryLoadInProgressState());
+  SummaryCubit(this._jiztRepository) : super(SummaryLoadInProgressState());
 
-  @override
-  Stream<SummaryState> mapEventToState(SummaryEvent event) async* {
-    if (event is LoadSummaryEvent) {
-      yield* _mapLoadSummaryEventToState(event, state);
-    } else if (event is DeleteSummaryEvent) {
-      yield* _mapDeleteSummaryEventToState(event, state);
-    }
-  }
-
-  Stream<SummaryState> _mapLoadSummaryEventToState(
-    LoadSummaryEvent event,
-    SummaryState state,
-  ) async* {
+  Future<void> loadSummary(String summaryId) async {
     try {
-      final summary = await _jiztRepository.getSummary(event.id);
-      yield SummaryLoadSuccessState(event.id, summary);
-    } catch (_) {
-      yield SummaryLoadFailureState();
+      final summary = await _jiztRepository.getSummary(summaryId);
+      emit(SummaryLoadSuccessState(summaryId, summary));
+    } catch (e) {
+      addError(e);
+      emit(SummaryLoadFailureState());
     }
   }
 
-  Stream<SummaryState> _mapDeleteSummaryEventToState(
-    DeleteSummaryEvent event,
-    SummaryState state,
-  ) async* {
-    if (state is SummaryLoadSuccessState) {
+  Future<void> deleteSummary() async {
+    final currentState = state;
+    if (currentState is SummaryLoadSuccessState) {
       try {
-        await _jiztRepository.deleteSummary(state.id);
-        yield SummaryRemovedState();
+        await _jiztRepository.deleteSummary(currentState.id);
+        emit(SummaryRemovedState());
       } catch (e) {
-        print(e);
-        yield SummaryLoadFailureState();
+        addError(e);
+        emit(SummaryLoadFailureState());
       }
     }
   }
