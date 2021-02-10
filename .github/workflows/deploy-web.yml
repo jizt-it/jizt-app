@@ -1,0 +1,28 @@
+name: Deploy app to Github Pages
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Build & Deploy flutter app to Github Pages
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v2
+      - uses: subosito/flutter-action@v1 # https://github.com/subosito/flutter-action
+        with:
+          channel: beta
+      - name: Enable flutter web
+        run: flutter config --enable-web
+      - name: Download dependencies
+        run: flutter pub get
+      - name: Build Flutter Web App
+        run: flutter build web
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3 # https://github.com/peaceiris/actions-gh-pages
+        with:
+          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          publish_dir: ./build/web
+          force_orphan: true
