@@ -6,7 +6,13 @@ import 'package:jizt/summaries/summaries.dart';
 import 'package:jizt_repository/jizt_repository.dart';
 
 class NewSummaryPage extends StatelessWidget {
-  NewSummaryPage({Key key}) : super(key: key);
+  const NewSummaryPage._({Key key}) : super(key: key);
+
+  static Route route() {
+    return MaterialPageRoute<void>(
+      builder: (_) => const NewSummaryPage._(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

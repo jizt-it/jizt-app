@@ -26,11 +26,16 @@ class _NewSummaryFormState extends State<NewSummaryForm> {
           'Input:',
           style: Theme.of(context).textTheme.subtitle1,
         ),
-        TextField(
-          controller: _textEditingController,
-          keyboardType: TextInputType.multiline,
-          minLines: 5,
-          maxLines: null,
+        Hero(
+          tag: 'text',
+          child: Material(
+            child: TextField(
+              controller: _textEditingController,
+              keyboardType: TextInputType.multiline,
+              minLines: 5,
+              maxLines: null,
+            ),
+          ),
         ),
         SizedBox(height: 64),
         ElevatedButton(

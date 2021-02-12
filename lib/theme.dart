@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
-Color get _primaryColor => Colors.red[300];
+ColorSwatch appPalette = ColorSwatch(0xFF5200f5, {
+  'electricViolet': Color(0xFF5200f5),
+});
+
+Color get _primaryColor => const Color(0xFF5200f5);
 
 Color get _secondaryColor => _primaryColor;
 
@@ -22,6 +26,12 @@ ThemeData get lightTheme => ThemeData.light().copyWith(
         surface: _surfaceColor,
         onSecondary: Colors.white,
       ),
+      textTheme: ThemeData.light().textTheme.apply(
+            fontFamily: 'Varela',
+          ),
+      primaryTextTheme: ThemeData.light().primaryTextTheme.apply(
+            fontFamily: 'Varela',
+          ),
     );
 
 ThemeData get darkTheme => ThemeData.dark().copyWith(

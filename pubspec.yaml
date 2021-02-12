@@ -15,9 +15,10 @@ dependencies:
     path: modules/domain
   jizt_repository:
     path: modules/data/jizt_repository
-  flutter_bloc: ^6.1.1  # https://pub.dev/packages/flutter_bloc
-  rxdart: ^0.25.0       # https://pub.dev/packages/rxdart
-  equatable: ^1.2.5     # https://pub.dev/packages/equatable
+  flutter_bloc: ^6.1.1    # https://pub.dev/packages/flutter_bloc
+  rxdart: ^0.25.0         # https://pub.dev/packages/rxdart
+  equatable: ^1.2.5       # https://pub.dev/packages/equatable
+  flutter_svg: ^0.19.2+1  # https://pub.dev/packages/flutter_svg
 
 dev_dependencies:
   flutter_test:
@@ -28,3 +29,10 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/drawables/
+  fonts:
+    - family: Varela
+      fonts:
+        - asset: assets/fonts/VarelaRound-Regular.ttf
