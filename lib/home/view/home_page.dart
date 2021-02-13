@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:jizt/new_summary/new_summary.dart';
+import 'package:jizt/new_text_summary/new_text_summary.dart';
 import 'package:jizt/summaries/summaries.dart';
+import 'package:jizt/widgets/clouds_background.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key key}) : super(key: key);
@@ -28,34 +29,7 @@ class HomePage extends StatelessWidget {
       ),
       body: Stack(
         children: [
-          Container(
-            width: double.infinity,
-            height: 300,
-            decoration: new BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Color(0xFFC3C0F1),
-                  Color(0xFFE5E1FC),
-                ],
-              ),
-              borderRadius: BorderRadius.vertical(
-                  bottom: Radius.elliptical(
-                      MediaQuery.of(context).size.width / 5, 30.0)),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 40.0, right: 16.0),
-            child: Align(
-              alignment: Alignment.topRight,
-              child: SvgPicture.asset(
-                'assets/drawables/clouds.svg',
-                semanticsLabel: 'Clouds',
-                width: MediaQuery.of(context).size.width / 2,
-              ),
-            ),
-          ),
+          CloudsBackground(),
           SafeArea(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -149,11 +123,11 @@ class HomePage extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Hero(
-                      tag: 'text',
+                      tag: 'card',
                       child: GestureDetector(
                         onTap: () {
                           Navigator.of(context).push<void>(
-                            NewSummaryPage.route(),
+                            NewTextSummaryPage.route(),
                           );
                         },
                         child: Card(
@@ -163,7 +137,12 @@ class HomePage extends StatelessWidget {
                           child: SizedBox.expand(
                             child: Padding(
                               padding: const EdgeInsets.all(16.0),
-                              child: Text('Type or paste your text...'),
+                              child: Text(
+                                'Type or paste your text...',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                ),
+                              ),
                             ),
                           ),
                         ),

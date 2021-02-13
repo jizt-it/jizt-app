@@ -1,56 +1,59 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-ColorSwatch appPalette = ColorSwatch(0xFF5200f5, {
-  'electricViolet': Color(0xFF5200f5),
+ColorSwatch appPalette = ColorSwatch(0xFF5200F5, {
+  'primaryColor': Color(0xFF5200F5),
+  'primaryDarkColor': Color(0xFF050081),
+  'primaryLightColor': Color(0xFF9246FF),
+  'secondaryColor': Color(0xFFA70EAC),
+  'secondaryDarkColor': Color(0xFF74007C),
+  'secondaryLightColor': Color(0xFFDC51DE),
+  'primaryTextColor': Color(0xFFFFFFFF),
+  'secondaryTextColor': Color(0xFFFFFFFF),
+  'surfaceColor': Colors.grey.withOpacity(0.15),
 });
 
-Color get _primaryColor => const Color(0xFF5200f5);
-
-Color get _secondaryColor => _primaryColor;
-
-Color get _surfaceColor => Colors.grey.withOpacity(0.15);
-
-ThemeData get lightTheme => ThemeData.light().copyWith(
-      brightness: Brightness.light,
-      primaryColor: _primaryColor,
-      accentColor: _secondaryColor,
-      buttonTheme: const ButtonThemeData(
-        textTheme: ButtonTextTheme.primary,
+/// Ref: https://material.io/components/cards/flutter#theming-a-card
+ThemeData get lightTheme {
+  final ThemeData base = ThemeData.light();
+  final ColorScheme colorScheme = ColorScheme.light(
+    primary: appPalette['primaryColor'],
+    primaryVariant: appPalette['primaryDarkColor'],
+    secondary: appPalette['secondaryColor'],
+    secondaryVariant: appPalette['secondaryDarkColor'],
+    surface: appPalette['surfaceColor'],
+    onSecondary: Colors.white,
+  );
+  return base.copyWith(
+    colorScheme: colorScheme,
+    buttonTheme: ButtonThemeData(
+      colorScheme: colorScheme,
+      textTheme: ButtonTextTheme.primary,
+    ),
+    cardTheme: base.cardTheme.copyWith(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8.0),
       ),
-      appBarTheme: const AppBarTheme(
-        brightness: Brightness.dark,
-      ),
-      colorScheme: ColorScheme.light(
-        primary: _primaryColor,
-        secondary: _secondaryColor,
-        surface: _surfaceColor,
-        onSecondary: Colors.white,
-      ),
-      textTheme: ThemeData.light().textTheme.apply(
-            fontFamily: 'Varela',
-          ),
-      primaryTextTheme: ThemeData.light().primaryTextTheme.apply(
-            fontFamily: 'Varela',
-          ),
-    );
-
-ThemeData get darkTheme => ThemeData.dark().copyWith(
+    ),
+    appBarTheme: AppBarTheme(
       brightness: Brightness.dark,
-      primaryColor: _primaryColor,
-      accentColor: _secondaryColor,
-      scaffoldBackgroundColor: Colors.grey[900],
-      buttonTheme: const ButtonThemeData(
-        textTheme: ButtonTextTheme.primary,
+      color: Colors.transparent,
+      backgroundColor: Colors.transparent,
+      foregroundColor: Colors.transparent,
+      elevation: 0.0,
+      iconTheme: IconThemeData(
+        color: appPalette['primaryDarkColor'],
       ),
-      appBarTheme: AppBarTheme(
-        brightness: Brightness.dark,
-        color: Colors.grey[900],
+      actionsIconTheme: IconThemeData(
+        color: appPalette['primaryDarkColor'],
       ),
-      colorScheme: ColorScheme.dark(
-        primary: _primaryColor,
-        secondary: _secondaryColor,
-        surface: _surfaceColor,
-        onPrimary: Colors.white,
-        onSecondary: Colors.white,
-      ),
-    );
+    ),
+    textTheme: ThemeData.light().textTheme.apply(
+          fontFamily: 'Varela',
+        ),
+    primaryTextTheme: ThemeData.light().primaryTextTheme.apply(
+          fontFamily: 'Varela',
+          bodyColor: appPalette['primaryDarkColor'],
+        ),
+  );
+}

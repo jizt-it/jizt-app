@@ -6,48 +6,48 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jizt/utils/poller.dart';
 import 'package:jizt_repository/jizt_repository.dart';
 
-part 'new_summary_state.dart';
+part 'new_text_summary_state.dart';
 
-class NewSummaryCubit extends Cubit<NewSummaryState> {
+class NewTextSummaryCubit extends Cubit<NewTextSummaryState> {
   final JiztRepository _jiztRepository;
   StreamSubscription<Summary> pollerSubscription;
 
-  NewSummaryCubit(this._jiztRepository)
-      : super(const NewSummaryState.initial());
+  NewTextSummaryCubit(this._jiztRepository)
+      : super(const NewTextSummaryState.initial());
 
-  Future<void> requestNewSummary(String source) async {
-    if (state.status != NewSummaryStatus.initial || source.isEmpty) {
-      emit(NewSummaryState.initial());
+  Future<void> requestNewSummary({String source}) async {
+    if (state.status != NewTextSummaryStatus.initial || source.isEmpty) {
+      emit(NewTextSummaryState.initial());
       return;
     }
-    emit(NewSummaryState.requestingSummary(source));
+    emit(NewTextSummaryState.requestingSummary(source));
     try {
       final summaryId = await _jiztRepository.requestSummary(source);
       _checkNewSummaryStatus(source, summaryId);
     } on Exception {
-      emit(NewSummaryState.failure());
+      emit(NewTextSummaryState.failure());
     }
   }
 
   void _checkNewSummaryStatus(String source, String summaryId) {
-    emit(NewSummaryState.waitingToCheckNewSummaryStatus(source, summaryId));
+    emit(NewTextSummaryState.waitingToCheckNewSummaryStatus(source, summaryId));
     pollerSubscription = Poller((_) => _jiztRepository.getSummary(summaryId))
         .poll()
         .listen((summary) async => await _onNewSummaryStatusReceived(summary));
   }
 
   Future<void> _onNewSummaryStatusReceived(Summary summary) async {
-    if (state.status == NewSummaryStatus.checkingNewSummaryStatus) {
+    if (state.status == NewTextSummaryStatus.checkingNewSummaryStatus) {
       return; // Already checking status
     }
-    emit(NewSummaryState.checkingNewSummaryStatus(
+    emit(NewTextSummaryState.checkingNewSummaryStatus(
         state.source, state.summaryId));
     final summary = await _jiztRepository.getSummary(state.summaryId);
     if (summary.status == Status.completed) {
       pollerSubscription.cancel();
-      emit(NewSummaryState.success(state.source, state.summaryId));
+      emit(NewTextSummaryState.success(state.source, state.summaryId));
     } else {
-      emit(NewSummaryState.waitingToCheckNewSummaryStatus(
+      emit(NewTextSummaryState.waitingToCheckNewSummaryStatus(
         state.source,
         state.summaryId,
       ));
@@ -55,6 +55,6 @@ class NewSummaryCubit extends Cubit<NewSummaryState> {
   }
 
   Future<void> reset() async {
-    emit(NewSummaryState.initial());
+    emit(NewTextSummaryState.initial());
   }
 }
