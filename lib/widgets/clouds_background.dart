@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:jizt/widgets/platform_svg_picture.dart';
 
 class CloudsBackground extends StatelessWidget {
   const CloudsBackground({Key key}) : super(key: key);
@@ -32,9 +32,8 @@ class CloudsBackground extends StatelessWidget {
         padding: const EdgeInsets.only(top: 40.0, right: 16.0),
         child: Align(
           alignment: Alignment.topRight,
-          child: SvgPicture.asset(
+          child: PlatformSvgPicture.asset(
             'assets/drawables/clouds.svg',
-            semanticsLabel: 'Clouds',
             width: screenSize.width / 2.0,
           ),
         ),

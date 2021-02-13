@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jizt/new_text_summary/new_text_summary.dart';
 import 'package:jizt/summaries/summaries.dart';
 import 'package:jizt/widgets/clouds_background.dart';
+import 'package:jizt/widgets/platform_shader_mask.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key key}) : super(key: key);
@@ -181,7 +182,7 @@ class HomePage extends StatelessWidget {
                   height: 130,
                   width: MediaQuery.of(context).size.width,
                   child: Container(
-                    child: ShaderMask(
+                    child: PlatformShaderMask(
                       shaderCallback: (Rect bounds) {
                         return LinearGradient(
                           begin: Alignment.centerLeft,
