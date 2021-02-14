@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jizt/summaries/summaries.dart';
+import 'package:jizt/widgets/clouds_background.dart';
 import 'package:jizt_repository/jizt_repository.dart';
 
 class SummariesPage extends StatelessWidget {
@@ -9,22 +10,30 @@ class SummariesPage extends StatelessWidget {
 
   static Route route() {
     return MaterialPageRoute<void>(
-      builder: (_) => BlocProvider(
-        create: (context) => SummariesCubit(
-          context.read<JiztRepository>(),
-        )..loadSummaries(),
-        child: const SummariesPage._(),
-      ),
+      builder: (context) => const SummariesPage._(),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Summaries'),
+    return BlocProvider(
+      create: (context) => SummariesCubit(
+        context.read<JiztRepository>(),
+      )..loadSummaries(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Summaries'),
+        ),
+        body: Stack(
+          children: [
+            CloudsBackground(),
+            SafeArea(
+              child: SummariesList(),
+            ),
+          ],
+        ),
+        extendBodyBehindAppBar: true,
       ),
-      body: SummariesList(),
     );
   }
 }

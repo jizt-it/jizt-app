@@ -1,8 +1,11 @@
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jizt/summaries/summaries.dart';
 import 'package:jizt/summary/summary.dart';
+import 'package:jizt/theme.dart';
+import 'package:jizt/widgets/date_label.dart';
 
 class SummariesList extends StatelessWidget {
   SummariesList({Key key}) : super(key: key);
@@ -10,7 +13,6 @@ class SummariesList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<SummariesCubit, SummariesState>(
-      listenWhen: (previous, current) => previous != current,
       listener: (context, state) {
         if (state is SummariesLoadFailureState) {
           ScaffoldMessenger.of(context)
@@ -23,24 +25,58 @@ class SummariesList extends StatelessWidget {
       builder: (context, state) {
         if (state is SummariesLoadSuccessState) {
           final summariesIds = state.summaries.keys.toList(growable: false);
-          return ListView.separated(
-            padding: const EdgeInsets.all(8),
+          return ListView.builder(
+            padding:
+                const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
             itemCount: summariesIds.length,
             itemBuilder: (BuildContext context, int index) {
-              return ListTile(
-                title: Text('${summariesIds[index]}'),
-                onTap: () => Navigator.of(context).push<void>(
-                  SummaryPage.route(summariesIds[index]),
-                ),
-              );
+              final summary = state.summaries[summariesIds[index]];
+              return _SummariesListItem(summary: summary);
             },
-            separatorBuilder: (BuildContext context, int index) =>
-                const Divider(),
           );
         } else {
           return Container();
         }
       },
+    );
+  }
+}
+
+class _SummariesListItem extends StatelessWidget {
+  const _SummariesListItem({
+    Key key,
+    @required this.summary,
+  }) : super(key: key);
+
+  final Summary summary;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () => Navigator.of(context).push<void>(
+        SummaryPage.route(summary.id),
+      ),
+      child: Card(
+        color: appPalette['primaryColor'],
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Align(
+                alignment: Alignment.topLeft,
+                child: DateLabel(date: summary.startedAt),
+              ),
+              SizedBox(height: 8),
+              Text(
+                '${summary.output}',
+                maxLines: 5,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(color: Colors.white),
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

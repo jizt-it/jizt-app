@@ -23,6 +23,7 @@ dependencies:
   share: ^0.6.5+4         # https://pub.dev/packages/share
   clipboard: ^0.1.2+8     # https://pub.dev/packages/clipboard
   fluttertoast: ^7.1.6    # https://pub.dev/packages/fluttertoast
+  timeago: ^2.0.29        # https://pub.dev/packages/timeago
 
 dev_dependencies:
   flutter_test:
