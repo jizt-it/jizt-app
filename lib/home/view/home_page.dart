@@ -25,7 +25,8 @@ class HomePage extends StatelessWidget {
             onPressed: () {
               // TODO Open menu
             },
-          )
+          ),
+          SizedBox(width: 8)
         ],
       ),
       body: Stack(

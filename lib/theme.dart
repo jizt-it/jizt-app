@@ -48,6 +48,9 @@ ThemeData get lightTheme {
         color: appPalette['primaryDarkColor'],
       ),
     ),
+    iconTheme: IconThemeData(
+      color: appPalette['primaryDarkColor'],
+    ),
     textTheme: ThemeData.light().textTheme.apply(
           fontFamily: 'Varela',
         ),

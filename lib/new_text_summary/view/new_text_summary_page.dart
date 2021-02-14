@@ -10,7 +10,14 @@ class NewTextSummaryPage extends StatelessWidget {
   const NewTextSummaryPage._({Key key}) : super(key: key);
 
   static Route route() {
-    return FadePageRoute(page: const NewTextSummaryPage._());
+    return FadePageRoute(
+      page: BlocProvider(
+        create: (context) => NewTextSummaryCubit(
+          context.read<JiztRepository>(),
+        ),
+        child: const NewTextSummaryPage._(),
+      ),
+    );
   }
 
   @override
@@ -25,19 +32,15 @@ class NewTextSummaryPage extends StatelessWidget {
             onPressed: () {
               // TODO open settings
             },
-          )
+          ),
+          SizedBox(width: 8)
         ],
       ),
       body: Stack(
         children: [
           CloudsBackground(),
           SafeArea(
-            child: BlocProvider(
-              create: (context) => NewTextSummaryCubit(
-                context.read<JiztRepository>(),
-              ),
-              child: NewTextSummaryBody(),
-            ),
+            child: NewTextSummaryBody(),
           ),
         ],
       ),

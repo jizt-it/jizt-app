@@ -1,2 +1,2 @@
-export 'summary_content.dart';
+export 'summary_body.dart';
 export 'summary_page.dart';

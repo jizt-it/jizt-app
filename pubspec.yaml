@@ -19,6 +19,10 @@ dependencies:
   rxdart: ^0.25.0         # https://pub.dev/packages/rxdart
   equatable: ^1.2.5       # https://pub.dev/packages/equatable
   flutter_svg: ^0.19.2+1  # https://pub.dev/packages/flutter_svg
+  expandable: ^4.1.4      # https://pub.dev/packages/expandable
+  share: ^0.6.5+4         # https://pub.dev/packages/share
+  clipboard: ^0.1.2+8     # https://pub.dev/packages/clipboard
+  fluttertoast: ^7.1.6    # https://pub.dev/packages/fluttertoast
 
 dev_dependencies:
   flutter_test:

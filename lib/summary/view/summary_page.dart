@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jizt/summary/summary.dart';
+import 'package:jizt/widgets/clouds_background.dart';
 import 'package:jizt_repository/jizt_repository.dart';
 
 class SummaryPage extends StatelessWidget {
@@ -31,13 +32,19 @@ class SummaryPage extends StatelessWidget {
               context.read<SummaryCubit>()..deleteSummary();
               Navigator.pop(context);
             },
-          )
+          ),
+          SizedBox(width: 8)
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(24.0),
-        child: SummaryContent(),
+      body: Stack(
+        children: [
+          CloudsBackground(),
+          SafeArea(
+            child: SummaryBody(),
+          ),
+        ],
       ),
+      extendBodyBehindAppBar: true,
     );
   }
 }
