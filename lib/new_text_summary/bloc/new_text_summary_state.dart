@@ -1,7 +1,8 @@
-part of 'new_text_summary_bloc.dart';
+part of 'new_text_summary_cubit.dart';
 
 enum NewTextSummaryStatus {
   initial,
+  enteringText,
   requestingSummary,
   waitingToCheckNewSummaryStatus,
   checkingNewSummaryStatus,
@@ -20,7 +21,11 @@ class NewTextSummaryState extends Equatable {
     this.summaryId = "",
   });
 
-  const NewTextSummaryState.initial() : this._();
+  const NewTextSummaryState.initial()
+      : this._(status: NewTextSummaryStatus.initial);
+
+  const NewTextSummaryState.enteringText({String source})
+      : this._(status: NewTextSummaryStatus.enteringText, source: source);
 
   const NewTextSummaryState.requestingSummary(String source)
       : this._(

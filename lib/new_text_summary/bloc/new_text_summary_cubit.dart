@@ -15,8 +15,14 @@ class NewTextSummaryCubit extends Cubit<NewTextSummaryState> {
   NewTextSummaryCubit(this._jiztRepository)
       : super(const NewTextSummaryState.initial());
 
+  Future<void> enteringText({String initialText}) async {
+    emit(NewTextSummaryState.enteringText(source: initialText));
+  }
+
   Future<void> requestNewSummary({String source}) async {
-    if (state.status != NewTextSummaryStatus.initial || source.isEmpty) {
+    if ((state.status != NewTextSummaryStatus.enteringText &&
+            state.status != NewTextSummaryStatus.failure) ||
+        source.isEmpty) {
       emit(NewTextSummaryState.initial());
       return;
     }
