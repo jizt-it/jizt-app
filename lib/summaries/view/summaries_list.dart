@@ -24,13 +24,13 @@ class SummariesList extends StatelessWidget {
       },
       builder: (context, state) {
         if (state is SummariesLoadSuccessState) {
-          final summariesIds = state.summaries.keys.toList(growable: false);
           return ListView.builder(
             padding:
                 const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
-            itemCount: summariesIds.length,
+            physics: BouncingScrollPhysics(),
+            itemCount: state.summaries.length,
             itemBuilder: (BuildContext context, int index) {
-              final summary = state.summaries[summariesIds[index]];
+              final summary = state.summaries[index];
               return _SummariesListItem(summary: summary);
             },
           );

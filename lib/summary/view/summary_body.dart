@@ -73,7 +73,9 @@ class SummaryBodyCard extends StatelessWidget {
                       IconButton(
                         icon: Icon(Icons.share),
                         tooltip: 'Share',
-                        onPressed: () => Share.share(summary.output),
+                        onPressed: () => Share.share(
+                          '${summary.output}\n\nSummary generated using www.jizt.it',
+                        ),
                       ),
                     ],
                   ),

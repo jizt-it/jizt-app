@@ -9,13 +9,14 @@ part 'summaries_state.dart';
 
 class SummariesCubit extends Cubit<SummariesState> {
   final JiztRepository _jiztRepository;
-  StreamSubscription<Map<String, Summary>> summariesSubscription;
+  StreamSubscription<List<Summary>> summariesSubscription;
 
   SummariesCubit(this._jiztRepository) : super(SummariesLoadInProgressState());
 
   void loadSummaries() {
     summariesSubscription = _jiztRepository
         .streamAllSummaries()
+        .map((summaries) => summaries..sort((b, a) => a.compareTo(b)))
         .listen((summaries) => emit(SummariesLoadSuccessState(summaries)));
   }
 

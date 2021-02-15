@@ -10,9 +10,9 @@ abstract class JiztRepository {
 
   Future<Summary> getSummary(String id);
 
-  Future<Map<String, Summary>> getAllSummaries();
+  Future<List<Summary>> getAllSummaries();
 
-  Stream<Map<String, Summary>> streamAllSummaries();
+  Stream<List<Summary>> streamAllSummaries();
 
   Future<void> deleteSummary(String id);
 }
@@ -65,18 +65,21 @@ class JiztRepositoryImpl extends JiztRepository {
   }
 
   @override
-  Future<Map<String, Summary>> getAllSummaries() async {
+  Future<List<Summary>> getAllSummaries() async {
     final mapper = SummaryEntityToModelMapper();
     return _jiztCacheClient
         .getAll()
-        .map((key, value) => MapEntry(key, mapper.map(value)));
+        .map((summaryEntity) => mapper.map(summaryEntity));
   }
 
   @override
-  Stream<Map<String, Summary>> streamAllSummaries() {
+  Stream<List<Summary>> streamAllSummaries() {
     final mapper = SummaryEntityToModelMapper();
-    return _jiztCacheClient.streamAll().map((summariesMap) =>
-        summariesMap.map((key, value) => MapEntry(key, mapper.map(value))));
+    return _jiztCacheClient.streamAll().map((summaryEntities) => summaryEntities
+        .map(
+          (summaryEntity) => mapper.map(summaryEntity),
+        )
+        .toList(growable: false));
   }
 
   @override

@@ -1,4 +1,4 @@
-class Summary {
+class Summary extends Comparable {
   final String id;
   final String source;
   final Status status;
@@ -13,6 +13,9 @@ class Summary {
       this.output,
       this.startedAt,
       this.endedAt});
+
+  @override
+  int compareTo(other) => this.startedAt.compareTo(other.startedAt);
 }
 
 enum Status { preprocessing, completed, unknown }

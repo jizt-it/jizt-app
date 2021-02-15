@@ -10,9 +10,9 @@ abstract class SummariesState extends Equatable {
 class SummariesLoadInProgressState extends SummariesState {}
 
 class SummariesLoadSuccessState extends SummariesState {
-  final Map<String, Summary> summaries;
+  final List<Summary> summaries;
 
-  const SummariesLoadSuccessState([this.summaries = const {}]);
+  const SummariesLoadSuccessState([this.summaries = const []]);
 
   @override
   List<Object> get props => [summaries];

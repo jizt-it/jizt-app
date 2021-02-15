@@ -10,9 +10,9 @@ abstract class JiztCacheClient {
 
   Stream<SummaryEntity> stream(String summaryId);
 
-  Map<String, SummaryEntity> getAll();
+  List<SummaryEntity> getAll();
 
-  Stream<Map<String, SummaryEntity>> streamAll();
+  Stream<List<SummaryEntity>> streamAll();
 
   Future<void> delete(String summaryId);
 
@@ -43,12 +43,12 @@ class JiztCacheClientImpl extends JiztCacheClient {
   }
 
   @override
-  Map<String, SummaryEntity> getAll() {
-    return _box.toMap().cast();
+  List<SummaryEntity> getAll() {
+    return _box.toMap().values.toList(growable: false);
   }
 
   @override
-  Stream<Map<String, SummaryEntity>> streamAll() {
+  Stream<List<SummaryEntity>> streamAll() {
     return _box.watch().map((_) => getAll()).startWith(getAll());
   }
 

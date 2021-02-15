@@ -73,7 +73,7 @@ class _NewTextSummaryBodyState extends State<NewTextSummaryBody> {
 
   void onSummarySuccess(String id) async {
     await Future.delayed(Duration(seconds: 1));
-    Navigator.of(context).push<void>(SummaryPage.route(id));
+    Navigator.of(context).pushReplacement(SummaryPage.route(id));
     await Future.delayed(Duration(seconds: 1));
     _textEditingController.clear();
     BlocProvider.of<NewTextSummaryCubit>(context).reset();
