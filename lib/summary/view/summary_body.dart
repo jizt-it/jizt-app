@@ -48,67 +48,63 @@ class SummaryBodyCard extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
       children: [
-        Hero(
-          tag: 'card',
-          child: Card(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                children: [
-                  Text(
-                    summary.output,
+        Card(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                Text(
+                  summary.output,
+                  softWrap: true,
+                  style: Theme.of(context).textTheme.subtitle1,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    IconButton(
+                      icon: Icon(Icons.copy),
+                      tooltip: 'Copy',
+                      onPressed: () => FlutterClipboard.copy(summary.output)
+                          .then((_) => Fluttertoast.showToast(msg: "Copied!")),
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.share),
+                      tooltip: 'Share',
+                      onPressed: () => Share.share(
+                        '${summary.output}\n\nSummary generated using www.jizt.it',
+                      ),
+                    ),
+                  ],
+                ),
+                ExpandablePanel(
+                  header: Text(
+                    'Original',
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
+                  expanded: Text(
+                    summary.source,
                     softWrap: true,
-                    style: Theme.of(context).textTheme.subtitle1,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      IconButton(
-                        icon: Icon(Icons.copy),
-                        tooltip: 'Copy',
-                        onPressed: () => FlutterClipboard.copy(summary.output)
-                            .then(
-                                (_) => Fluttertoast.showToast(msg: "Copied!")),
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.share),
-                        tooltip: 'Share',
-                        onPressed: () => Share.share(
-                          '${summary.output}\n\nSummary generated using www.jizt.it',
-                        ),
-                      ),
-                    ],
+                  theme: ExpandableThemeData(
+                      tapHeaderToExpand: true,
+                      hasIcon: true,
+                      headerAlignment: ExpandablePanelHeaderAlignment.center),
+                ),
+                ExpandablePanel(
+                  header: Text(
+                    'Metadata',
+                    style: Theme.of(context).textTheme.headline6,
                   ),
-                  ExpandablePanel(
-                    header: Text(
-                      'Original',
-                      style: Theme.of(context).textTheme.headline6,
-                    ),
-                    expanded: Text(
-                      summary.source,
-                      softWrap: true,
-                    ),
-                    theme: ExpandableThemeData(
-                        tapHeaderToExpand: true,
-                        hasIcon: true,
-                        headerAlignment: ExpandablePanelHeaderAlignment.center),
+                  expanded: Text(
+                    'Created at: ${summary.startedAt}',
+                    softWrap: true,
                   ),
-                  ExpandablePanel(
-                    header: Text(
-                      'Metadata',
-                      style: Theme.of(context).textTheme.headline6,
-                    ),
-                    expanded: Text(
-                      'Created at: ${summary.startedAt}',
-                      softWrap: true,
-                    ),
-                    theme: ExpandableThemeData(
-                        tapHeaderToExpand: true,
-                        hasIcon: true,
-                        headerAlignment: ExpandablePanelHeaderAlignment.center),
-                  ),
-                ],
-              ),
+                  theme: ExpandableThemeData(
+                      tapHeaderToExpand: true,
+                      hasIcon: true,
+                      headerAlignment: ExpandablePanelHeaderAlignment.center),
+                ),
+              ],
             ),
           ),
         ),
