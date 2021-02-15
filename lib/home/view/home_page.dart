@@ -1,10 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:jizt/home/home.dart';
+import 'package:jizt/new_text_summary/new_text_summary.dart';
 import 'package:jizt/widgets/clouds_background.dart';
 
-class HomePage extends StatelessWidget {
-  HomePage({Key key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  static const platform = const MethodChannel('app.channel.shared.data');
+
+  @override
+  void initState() {
+    super.initState();
+    _getSharedText();
+  }
+
+  /// Gets the text shared with Jizt by the user using the native share dialog
+  _getSharedText() async {
+    final sharedData = await platform.invokeMethod("getSharedText");
+    _onSharedTextReceived(sharedData);
+  }
+
+  void _onSharedTextReceived(String text) {
+    if (text != null) {
+      Navigator.of(context).push<void>(
+        NewTextSummaryPage.route(initialText: text),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

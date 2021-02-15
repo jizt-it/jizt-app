@@ -6,20 +6,28 @@ import 'package:jizt/widgets/clouds_background.dart';
 import 'package:jizt_repository/jizt_repository.dart';
 
 class NewTextSummaryPage extends StatelessWidget {
-  const NewTextSummaryPage._({Key key}) : super(key: key);
+  const NewTextSummaryPage._({Key key, this.initialText}) : super(key: key);
 
-  static Route route() {
+  final String initialText;
+
+  static Route route({String initialText}) {
     return MaterialPageRoute<void>(
-      builder: (context) => const NewTextSummaryPage._(),
+      builder: (context) => NewTextSummaryPage._(initialText: initialText),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => NewTextSummaryCubit(
-        context.read<JiztRepository>(),
-      ),
+      create: (context) {
+        final cubit = NewTextSummaryCubit(
+          context.read<JiztRepository>(),
+        );
+        if (initialText != null) {
+          cubit.enteringText(initialText: initialText);
+        }
+        return cubit;
+      },
       child: Scaffold(
         appBar: AppBar(
           title: Text('New summary'),

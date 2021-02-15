@@ -212,7 +212,9 @@ class _SummariesList extends StatelessWidget {
               blendMode: BlendMode.dstOut,
               child: BlocBuilder<SummariesCubit, SummariesState>(
                 builder: (context, state) {
-                  if (state is SummariesLoadSuccessState &&
+                  if (state is SummariesLoadInProgressState) {
+                    return Center(child: CircularProgressIndicator());
+                  } else if (state is SummariesLoadSuccessState &&
                       state.summaries.isNotEmpty) {
                     return ListView.builder(
                       physics: BouncingScrollPhysics(),

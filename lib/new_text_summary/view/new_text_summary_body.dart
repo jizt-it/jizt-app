@@ -19,6 +19,10 @@ class _NewTextSummaryBodyState extends State<NewTextSummaryBody> {
   void initState() {
     super.initState();
     _newTextSummaryCubit = BlocProvider.of<NewTextSummaryCubit>(context);
+    final currentState = _newTextSummaryCubit.state;
+    if (currentState.status == NewTextSummaryStatus.enteringText) {
+      onEnteringText(currentState);
+    }
   }
 
   @override
