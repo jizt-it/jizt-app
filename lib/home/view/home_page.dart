@@ -1,5 +1,6 @@
 import 'dart:io' show Platform;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -25,7 +26,7 @@ class _HomePageState extends State<HomePage> {
   /// Gets the text shared with Jizt by the user using the native share dialog
   /// Android only for now
   _getSharedText() async {
-    if (!Platform.isAndroid) return;
+    if (kIsWeb || !Platform.isAndroid) return;
     final sharedData = await platform.invokeMethod("getSharedText");
     _onSharedTextReceived(sharedData);
   }

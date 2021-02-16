@@ -15,7 +15,7 @@ class PlatformSvgPicture {
     String semanticsLabel,
   }) {
     if (kIsWeb) {
-      return Image.asset(
+      return Image.network(
         assetPath,
         width: width,
         height: height,
