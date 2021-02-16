@@ -1,3 +1,5 @@
+import 'dart:io' show Platform;
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -11,7 +13,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  static const platform = const MethodChannel('app.channel.shared.data');
+  static const platform =
+      const MethodChannel('it.jizt.app.channel.shared.text');
 
   @override
   void initState() {
@@ -20,7 +23,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   /// Gets the text shared with Jizt by the user using the native share dialog
+  /// Android only for now
   _getSharedText() async {
+    if (!Platform.isAndroid) return;
     final sharedData = await platform.invokeMethod("getSharedText");
     _onSharedTextReceived(sharedData);
   }

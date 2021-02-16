@@ -1,4 +1,4 @@
-package com.example.jizt
+package it.jizt.app
 
 import android.content.Intent
 import android.os.Bundle
