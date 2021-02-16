@@ -18,15 +18,13 @@ class JiztRepositoryImpl extends JiztRepository {
     final summaryDto = await _jiztApiClient.requestSummary(
       SummaryRequestModelToDtoMapper().map(request),
     );
-    // Cache summary source
-    _jiztCacheClient.add(
-      summaryDto.summaryId,
-      SummaryEntity(id: summaryDto.summaryId, source: request.source),
-    );
-    return SummaryDtoToModelMapper().map(SummaryDtoWrapper(
+    final summary = SummaryDtoToModelMapper().map(SummaryDtoWrapper(
       source: request.source,
       summaryDto: summaryDto,
     ));
+    // Cache summary
+    _jiztCacheClient.add(summary.id, SummaryModelToEntityMapper().map(summary));
+    return summary;
   }
 
   @override
