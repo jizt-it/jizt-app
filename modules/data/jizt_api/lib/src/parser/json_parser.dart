@@ -4,7 +4,6 @@ import 'package:jizt_api/jizt_api.dart';
 
 import 'object_decoder.dart';
 
-export 'summary_id_parser.dart';
 export 'summary_parser.dart';
 
 abstract class JsonParser<T> {

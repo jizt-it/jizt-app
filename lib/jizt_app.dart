@@ -1,9 +1,9 @@
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jizt/home/home.dart';
 import 'package:jizt/theme.dart';
-import 'package:jizt_repository/jizt_repository.dart';
 
 class JiztApp extends StatelessWidget {
   final JiztRepository _jiztRepository;

@@ -1,21 +1,44 @@
-class Summary extends Comparable {
+import 'package:domain/domain.dart';
+
+class Summary extends Comparable<Summary> {
   final String id;
   final String source;
-  final Status status;
+  final SummaryStatus status;
   final String output;
   final DateTime startedAt;
   final DateTime endedAt;
 
-  Summary(
-      {this.id,
-      this.source,
-      this.status,
-      this.output,
-      this.startedAt,
-      this.endedAt});
+  // TODO add model and params
+
+  Summary({
+    this.id,
+    this.source,
+    this.status,
+    this.output,
+    this.startedAt,
+    this.endedAt,
+  });
 
   @override
-  int compareTo(other) => this.startedAt.compareTo(other.startedAt);
-}
+  int compareTo(Summary other) {
+    if (startedAt == null && other.startedAt == null) {
+      return 0;
+    } else if (startedAt == null && other.startedAt != null) {
+      return -1;
+    } else if (startedAt != null && other.startedAt == null) {
+      return 1;
+    } else {
+      return startedAt.compareTo(other.startedAt);
+    }
+  }
 
-enum Status { preprocessing, completed, unknown }
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Summary &&
+          runtimeType == other.runtimeType &&
+          startedAt == other.startedAt;
+
+  @override
+  int get hashCode => startedAt.hashCode;
+}

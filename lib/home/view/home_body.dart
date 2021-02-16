@@ -9,7 +9,6 @@ import 'package:jizt/summary/summary.dart';
 import 'package:jizt/theme.dart';
 import 'package:jizt/widgets/date_label.dart';
 import 'package:jizt/widgets/platform_shader_mask.dart';
-import 'package:jizt_repository/jizt_repository.dart';
 
 class HomeBody extends StatelessWidget {
   const HomeBody({

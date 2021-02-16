@@ -4,7 +4,6 @@ import 'package:domain/domain.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jizt/utils/poller.dart';
-import 'package:jizt_repository/jizt_repository.dart';
 
 part 'new_text_summary_state.dart';
 
@@ -28,8 +27,10 @@ class NewTextSummaryCubit extends Cubit<NewTextSummaryState> {
     }
     emit(NewTextSummaryState.requestingSummary(source));
     try {
-      final summaryId = await _jiztRepository.requestSummary(source);
-      _checkNewSummaryStatus(source, summaryId);
+      final summary = await _jiztRepository.requestSummary(
+        SummaryRequest(source: source),
+      );
+      _checkNewSummaryStatus(source, summary.id);
     } on Exception {
       emit(NewTextSummaryState.failure());
     }
@@ -49,7 +50,7 @@ class NewTextSummaryCubit extends Cubit<NewTextSummaryState> {
     emit(NewTextSummaryState.checkingNewSummaryStatus(
         state.source, state.summaryId));
     final summary = await _jiztRepository.getSummary(state.summaryId);
-    if (summary.status == Status.completed) {
+    if (summary.status == SummaryStatus.completed) {
       pollerSubscription.cancel();
       emit(NewTextSummaryState.success(state.source, state.summaryId));
     } else {

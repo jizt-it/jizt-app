@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:domain/domain.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:jizt_repository/jizt_repository.dart';
 
 part 'summary_state.dart';
 

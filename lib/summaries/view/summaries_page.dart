@@ -1,9 +1,9 @@
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jizt/summaries/summaries.dart';
 import 'package:jizt/widgets/clouds_background.dart';
-import 'package:jizt_repository/jizt_repository.dart';
 
 class SummariesPage extends StatelessWidget {
   const SummariesPage._({Key key}) : super(key: key);
