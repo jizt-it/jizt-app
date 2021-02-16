@@ -32,6 +32,15 @@ android {
         main.java.srcDirs += 'src/main/kotlin'
     }
 
+    signingConfigs {
+        release {
+            storeFile file('../../secrets/release.jks')
+            storePassword System.getenv("JIZT_RELEASE_KEY_STORE_PASS")
+            keyAlias System.getenv("JIZT_RELEASE_KEY_ALIAS")
+            keyPassword System.getenv("JIZT_RELEASE_KEY_PASS")
+        }
+    }
+
     defaultConfig {
         applicationId "it.jizt.app"
         minSdkVersion 16
@@ -42,9 +51,7 @@ android {
 
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
         }
     }
 }
