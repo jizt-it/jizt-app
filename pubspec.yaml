@@ -3,7 +3,7 @@ description: Jizt app.
 
 publish_to: 'none'
 
-version: 0.1.0+1
+version: 0.1.1+2
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -15,15 +15,15 @@ dependencies:
     path: modules/domain
   jizt_repository:
     path: modules/data/jizt_repository
-  flutter_bloc: ^6.1.1    # https://pub.dev/packages/flutter_bloc
-  rxdart: ^0.25.0         # https://pub.dev/packages/rxdart
-  equatable: ^1.2.5       # https://pub.dev/packages/equatable
-  flutter_svg: ^0.19.2+1  # https://pub.dev/packages/flutter_svg
-  expandable: ^4.1.4      # https://pub.dev/packages/expandable
-  share: ^0.6.5+4         # https://pub.dev/packages/share
-  clipboard: ^0.1.2+8     # https://pub.dev/packages/clipboard
-  fluttertoast: ^7.1.6    # https://pub.dev/packages/fluttertoast
-  timeago: ^2.0.29        # https://pub.dev/packages/timeago
+  flutter_bloc: ^6.1.1                # https://pub.dev/packages/flutter_bloc
+  rxdart: ^0.25.0                     # https://pub.dev/packages/rxdart
+  equatable: ^1.2.5                   # https://pub.dev/packages/equatable
+  flutter_svg: ^0.20.0-nullsafety.3   # https://pub.dev/packages/flutter_svg
+  expandable: ^4.1.4                  # https://pub.dev/packages/expandable
+  share: ^0.6.5+4                     # https://pub.dev/packages/share
+  clipboard: ^0.1.2+8                 # https://pub.dev/packages/clipboard
+  fluttertoast: ^7.1.6                # https://pub.dev/packages/fluttertoast
+  timeago: ^2.0.29                    # https://pub.dev/packages/timeago
 
 dev_dependencies:
   flutter_test:

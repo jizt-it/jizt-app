@@ -1,5 +1,5 @@
 import 'package:domain/domain.dart';
-import 'package:jizt_repository/src/mapper/Mapper.dart';
+import 'package:jizt_repository/src/mapper/mapper.dart';
 
 class SummaryStatusEntityToModelMapper extends Mapper<String, SummaryStatus> {
   @override

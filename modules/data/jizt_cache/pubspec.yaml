@@ -9,9 +9,9 @@ dependencies:
   flutter:
     sdk: flutter
   hive: ^1.4.4+1        # https://pub.dev/packages/hive
-  hive_flutter: ^0.3.1
+  hive_flutter: ^0.3.1  # https://pub.dev/packages/hive_flutter
   rxdart: ^0.25.0       # https://pub.dev/packages/rxdart
 
 dev_dependencies:
-  hive_generator: ^0.8.2  # Required by hive
-  build_runner: ^1.10.12  # Required by hive
+  hive_generator: ^0.8.2  # https://pub.dev/packages/hive_generator (required by hive)
+  build_runner: ^1.10.12  # https://pub.dev/packages/build_runner (required by hive)
