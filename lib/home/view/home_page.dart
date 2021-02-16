@@ -43,19 +43,19 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [
-          IconButton(
-            tooltip: 'More',
-            icon: Icon(
-              Icons.more_vert,
-            ),
-            onPressed: () {
-              // TODO Open menu
-            },
+          // actions: [
+          //   IconButton(
+          //     tooltip: 'More',
+          //     icon: Icon(
+          //       Icons.more_vert,
+          //     ),
+          //     onPressed: () {
+          //       // TODO Open menu
+          //     },
+          //   ),
+          //   SizedBox(width: 8)
+          // ],
           ),
-          SizedBox(width: 8)
-        ],
-      ),
       body: Stack(
         children: [
           CloudsBackground(),

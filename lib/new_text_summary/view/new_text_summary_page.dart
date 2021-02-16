@@ -31,16 +31,16 @@ class NewTextSummaryPage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text('New summary'),
-          actions: [
-            IconButton(
-              tooltip: 'Settings',
-              icon: Icon(Icons.settings),
-              onPressed: () {
-                // TODO open settings
-              },
-            ),
-            SizedBox(width: 8)
-          ],
+          // actions: [
+          //   IconButton(
+          //     tooltip: 'Settings',
+          //     icon: Icon(Icons.settings),
+          //     onPressed: () {
+          //       // TODO open settings
+          //     },
+          //   ),
+          //   SizedBox(width: 8)
+          // ],
         ),
         body: Stack(
           children: [
