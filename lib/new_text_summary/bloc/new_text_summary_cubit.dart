@@ -18,7 +18,11 @@ class NewTextSummaryCubit extends Cubit<NewTextSummaryState> {
     emit(NewTextSummaryState.enteringText(source: initialText));
   }
 
-  Future<void> requestNewSummary({String source}) async {
+  Future<void> requestNewSummary({
+    String source,
+    double relativeMaxLength,
+    double relativeMinLength,
+  }) async {
     if ((state.status != NewTextSummaryStatus.enteringText &&
             state.status != NewTextSummaryStatus.failure) ||
         source.isEmpty) {
@@ -28,7 +32,13 @@ class NewTextSummaryCubit extends Cubit<NewTextSummaryState> {
     emit(NewTextSummaryState.requestingSummary(source));
     try {
       final summary = await _jiztRepository.requestSummary(
-        SummaryRequest(source: source),
+        SummaryRequest(
+            source: source,
+            model: SummaryModel.t5Large,
+            params: SummaryParams(
+              relativeMaxLength: relativeMaxLength,
+              relativeMinLength: relativeMinLength,
+            )),
       );
       _checkNewSummaryStatus(source, summary.id);
     } on Exception {

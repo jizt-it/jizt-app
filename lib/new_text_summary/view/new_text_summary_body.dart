@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jizt/new_text_summary/new_text_summary.dart';
 import 'package:jizt/summary/summary.dart';
+import 'package:jizt/theme.dart';
 
 class NewTextSummaryBody extends StatefulWidget {
   @override
@@ -14,6 +15,7 @@ class _NewTextSummaryBodyState extends State<NewTextSummaryBody> {
   final _textEditingController = TextEditingController();
 
   NewTextSummaryCubit _newTextSummaryCubit;
+  RangeValues _summaryLengthRange;
 
   @override
   void initState() {
@@ -40,6 +42,12 @@ class _NewTextSummaryBodyState extends State<NewTextSummaryBody> {
           child: _NewTextSummaryInputCard(
             textEditingController: _textEditingController,
           ),
+        ),
+        SizedBox(height: 16),
+        SettingsCard(
+          onChanged: (RangeValues range) {
+            _summaryLengthRange = range;
+          },
         ),
         SizedBox(height: 16),
         BlocConsumer<NewTextSummaryCubit, NewTextSummaryState>(
@@ -72,7 +80,11 @@ class _NewTextSummaryBodyState extends State<NewTextSummaryBody> {
 
   void onSummarizeBtnClicked(NewTextSummaryState state) {
     FocusManager.instance.primaryFocus.unfocus();
-    _newTextSummaryCubit.requestNewSummary(source: _textEditingController.text);
+    _newTextSummaryCubit.requestNewSummary(
+      source: _textEditingController.text,
+      relativeMaxLength: _summaryLengthRange.end / 100,
+      relativeMinLength: _summaryLengthRange.start / 100,
+    );
   }
 
   void onSummarySuccess(String id) async {
@@ -160,6 +172,117 @@ class _PasteButton extends StatelessWidget {
         );
       },
     );
+  }
+}
+
+class SettingsCard extends StatefulWidget {
+  final ValueChanged<RangeValues> onChanged;
+
+  SettingsCard({this.onChanged});
+
+  @override
+  _SettingsCardState createState() => _SettingsCardState();
+}
+
+class _SettingsCardState extends State<SettingsCard> {
+  static const int MIN_RANGE = 10;
+  RangeValues _summaryLengthRange = const RangeValues(10, 40);
+
+  @override
+  void initState() {
+    super.initState();
+    widget.onChanged(_summaryLengthRange);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.only(
+          left: 18,
+          top: 16,
+          right: 16,
+          bottom: 8,
+        ),
+        child: Column(
+          children: [
+            Align(
+              alignment: Alignment.topLeft,
+              child: Text(
+                'Summary length',
+                style: TextStyle(
+                  color: appPalette['primaryDarkColor'],
+                ),
+              ),
+            ),
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    '0%',
+                    style: TextStyle(
+                      color: appPalette['secondaryTextColor'],
+                    ),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Text(
+                    '100%',
+                    style: TextStyle(
+                      color: appPalette['secondaryTextColor'],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 8,
+                    right: 24,
+                  ),
+                  child: RangeSlider(
+                    values: _summaryLengthRange,
+                    min: 0,
+                    max: 100,
+                    divisions: 10,
+                    labels: RangeLabels(
+                      '${_summaryLengthRange.start.round()}%',
+                      '${_summaryLengthRange.end.round()}%',
+                    ),
+                    onChanged: (RangeValues values) {
+                      setState(() {
+                        _updateSlider(values);
+                      });
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _updateSlider(RangeValues range) {
+    final finalRange = _getFinalRange(range);
+    _summaryLengthRange = finalRange;
+    widget.onChanged(finalRange);
+  }
+
+  RangeValues _getFinalRange(RangeValues range) {
+    if (range.end - range.start >= MIN_RANGE) {
+      return range;
+    } else {
+      if (_summaryLengthRange.start == range.start) {
+        return RangeValues(
+            _summaryLengthRange.start, _summaryLengthRange.start + MIN_RANGE);
+      } else {
+        return RangeValues(
+            _summaryLengthRange.end - MIN_RANGE, _summaryLengthRange.end);
+      }
+    }
   }
 }
 

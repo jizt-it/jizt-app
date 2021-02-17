@@ -37,7 +37,6 @@ ThemeData get lightTheme {
     ),
     appBarTheme: AppBarTheme(
       brightness: Brightness.dark,
-      color: Colors.transparent,
       backgroundColor: Colors.transparent,
       foregroundColor: Colors.transparent,
       elevation: 0.0,

@@ -34,16 +34,17 @@ class SummaryParams {
   /// If set to greater than 0, all n-grams of that size can only occur once.
   final int noRepeatNgramSize;
 
-  SummaryParams(
-      this.relativeMaxLength,
-      this.relativeMinLength,
-      this.doSample,
-      this.earlyStopping,
-      this.numBeams,
-      this.temperature,
-      this.topK,
-      this.topP,
-      this.repetitionPenalty,
-      this.lengthPenalty,
-      this.noRepeatNgramSize);
+  SummaryParams({
+    this.relativeMaxLength,
+    this.relativeMinLength,
+    this.doSample,
+    this.earlyStopping,
+    this.numBeams,
+    this.temperature,
+    this.topK,
+    this.topP,
+    this.repetitionPenalty,
+    this.lengthPenalty,
+    this.noRepeatNgramSize,
+  });
 }
