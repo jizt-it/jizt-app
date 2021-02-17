@@ -1,1 +1,4 @@
-enum SummaryModel { t5Large }
+enum SummaryModel {
+  t5Large,
+  unknown,
+}

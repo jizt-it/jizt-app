@@ -8,6 +8,8 @@ class SummaryEntityToModelMapper extends Mapper<SummaryEntity, Summary> {
     return Summary(
       id: input.id,
       source: input.source,
+      model: SummaryModelEntityToModelMapper().map(input.model),
+      params: SummaryParamsEntityToModelMapper().map(input.params),
       status: SummaryStatusEntityToModelMapper().map(input.status),
       output: input.output,
       startedAt: input.startedAt,

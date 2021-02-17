@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import 'package:jizt_cache/jizt_cache.dart';
 
 part 'summary_entity.g.dart';
 
@@ -9,17 +10,23 @@ class SummaryEntity extends HiveObject {
   @HiveField(1)
   final String source;
   @HiveField(2)
-  final String status;
+  final String model;
   @HiveField(3)
-  final String output;
+  final SummaryParamsEntity params;
   @HiveField(4)
-  final DateTime startedAt;
+  final String status;
   @HiveField(5)
+  final String output;
+  @HiveField(6)
+  final DateTime startedAt;
+  @HiveField(7)
   final DateTime endedAt;
 
   SummaryEntity({
     this.id,
     this.source,
+    this.model,
+    this.params,
     this.status,
     this.output,
     this.startedAt,

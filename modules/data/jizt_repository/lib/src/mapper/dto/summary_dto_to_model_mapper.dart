@@ -8,6 +8,8 @@ class SummaryDtoToModelMapper extends Mapper<SummaryDtoWrapper, Summary> {
     return Summary(
       id: input.summaryDto.summaryId,
       source: input.source,
+      model: SummaryModelDtoToModelMapper().map(input.summaryDto.model),
+      params: SummaryParamsDtoToModelMapper().map(input.summaryDto.params),
       status: SummaryStatusDtoToModelMapper().map(input.summaryDto.status),
       output: input.summaryDto.output,
       startedAt: input.summaryDto.startedAt,

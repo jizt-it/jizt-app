@@ -19,28 +19,34 @@ class SummaryEntityAdapter extends TypeAdapter<SummaryEntity> {
     return SummaryEntity(
       id: fields[0] as String,
       source: fields[1] as String,
-      status: fields[2] as String,
-      output: fields[3] as String,
-      startedAt: fields[4] as DateTime,
-      endedAt: fields[5] as DateTime,
+      model: fields[2] as String,
+      params: fields[3] as SummaryParamsEntity,
+      status: fields[4] as String,
+      output: fields[5] as String,
+      startedAt: fields[6] as DateTime,
+      endedAt: fields[7] as DateTime,
     );
   }
 
   @override
   void write(BinaryWriter writer, SummaryEntity obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
       ..write(obj.source)
       ..writeByte(2)
-      ..write(obj.status)
+      ..write(obj.model)
       ..writeByte(3)
-      ..write(obj.output)
+      ..write(obj.params)
       ..writeByte(4)
-      ..write(obj.startedAt)
+      ..write(obj.status)
       ..writeByte(5)
+      ..write(obj.output)
+      ..writeByte(6)
+      ..write(obj.startedAt)
+      ..writeByte(7)
       ..write(obj.endedAt);
   }
 

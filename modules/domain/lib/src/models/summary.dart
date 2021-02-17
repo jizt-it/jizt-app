@@ -3,16 +3,18 @@ import 'package:domain/domain.dart';
 class Summary extends Comparable<Summary> {
   final String id;
   final String source;
+  final SummaryModel model;
+  final SummaryParams params;
   final SummaryStatus status;
   final String output;
   final DateTime startedAt;
   final DateTime endedAt;
 
-  // TODO add model and params
-
   Summary({
     this.id,
     this.source,
+    this.model,
+    this.params,
     this.status,
     this.output,
     this.startedAt,
