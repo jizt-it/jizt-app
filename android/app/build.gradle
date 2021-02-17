@@ -65,10 +65,11 @@ flutter {
 }
 
 play { // https://github.com/Triple-T/gradle-play-publisher
+    // serviceAccountCredentials in ANDROID_PUBLISHER_CREDENTIALS secret
+    enabled = System.getenv("ANDROID_PUBLISHER_CREDENTIALS") != null
     artifactDir = file('../../build/app/outputs/bundle/release/app-release.aab')
     defaultToAppBundles = true
     track = 'internal'
-    // serviceAccountCredentials in ANDROID_PUBLISHER_CREDENTIALS secret
 }
 
 dependencies {
