@@ -21,6 +21,10 @@ class Summary extends Comparable<Summary> {
     this.endedAt,
   });
 
+  int get processingTime {
+    return endedAt.difference(startedAt).inSeconds;
+  }
+
   @override
   int compareTo(Summary other) {
     if (startedAt == null && other.startedAt == null) {

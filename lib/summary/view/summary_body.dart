@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:intl/intl.dart';
 import 'package:jizt/summary/summary.dart';
 import 'package:share/share.dart';
 
@@ -92,12 +93,31 @@ class SummaryBodyCard extends StatelessWidget {
                 ),
                 ExpandablePanel(
                   header: Text(
-                    'Metadata',
+                    'More info',
                     style: Theme.of(context).textTheme.headline6,
                   ),
-                  expanded: Text(
-                    'Created at: ${summary.startedAt}',
-                    softWrap: true,
+                  expanded: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Date: ${DateFormat('dd/MM/yyyy HH:mm:ss').format(summary.startedAt)}',
+                        softWrap: true,
+                      ),
+                      Text(
+                        'Processing time: ${summary.processingTime}s',
+                        softWrap: true,
+                      ),
+                      Text(
+                        'Model: ${summary.model.displayName}',
+                        softWrap: true,
+                      ),
+                      Text(
+                        'Relative max length: ${summary.params.relativeMaxLength * 100}%',
+                      ),
+                      Text(
+                        'Relative min length: ${summary.params.relativeMinLength * 100}%',
+                      ),
+                    ],
                   ),
                   theme: ExpandableThemeData(
                       tapHeaderToExpand: true,
