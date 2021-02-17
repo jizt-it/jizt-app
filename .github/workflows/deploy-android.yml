@@ -1,4 +1,4 @@
-name: Deploy Android app to Google Play
+name: Deploy Android app
 on:
   push:
     tags:

@@ -31,7 +31,7 @@ dev_dependencies:
     sdk: flutter
   integration_test:
     sdk: flutter
-  bloc_test: ^7.1.0 # https://pub.dev/packages/bloc_test
+  bloc_test: ^7.1.0                   # https://pub.dev/packages/bloc_test
 
 flutter:
   uses-material-design: true

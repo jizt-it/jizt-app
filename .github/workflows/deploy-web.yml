@@ -1,4 +1,4 @@
-name: Deploy app to Github Pages
+name: Deploy Web app
 on:
   push:
     branches:
@@ -6,7 +6,7 @@ on:
 
 jobs:
   deploy:
-    name: Build & Deploy flutter app to Github Pages
+    name: Deploy Web app to Github Pages
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:

@@ -26,7 +26,7 @@ class JiztApiClientImpl extends JiztApiClient {
   Future<SummaryDto> requestSummary(SummaryRequestDto request) async {
     final uri = Uri.https(_baseUrl, '/v1/summaries/plain-text');
     final body = jsonEncode(request.toJson());
-    print('--> POST ${uri.toString()}\n${body}');
+    print('--> POST ${uri.toString()}\n$body');
 
     http.Response response;
     try {
