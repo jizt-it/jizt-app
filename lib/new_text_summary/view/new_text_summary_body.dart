@@ -16,6 +16,7 @@ class _NewTextSummaryBodyState extends State<NewTextSummaryBody> {
 
   NewTextSummaryCubit _newTextSummaryCubit;
   RangeValues _summaryLengthRange;
+  FocusNode _inputNode = FocusNode();
 
   @override
   void initState() {
@@ -24,6 +25,8 @@ class _NewTextSummaryBodyState extends State<NewTextSummaryBody> {
     final currentState = _newTextSummaryCubit.state;
     if (currentState.status == NewTextSummaryStatus.enteringText) {
       onEnteringText(currentState);
+    } else {
+      _showKeyboard();
     }
   }
 
@@ -40,6 +43,7 @@ class _NewTextSummaryBodyState extends State<NewTextSummaryBody> {
       child: Column(children: [
         Expanded(
           child: _NewTextSummaryInputCard(
+            inputNode: _inputNode,
             textEditingController: _textEditingController,
           ),
         ),
@@ -64,6 +68,11 @@ class _NewTextSummaryBodyState extends State<NewTextSummaryBody> {
     );
   }
 
+  void _showKeyboard() async {
+    await Future.delayed(Duration(milliseconds: 500));
+    FocusScope.of(context).requestFocus(_inputNode);
+  }
+
   void onStateChanged(NewTextSummaryState state) {
     if (state.status == NewTextSummaryStatus.enteringText) {
       onEnteringText(state);
@@ -76,6 +85,9 @@ class _NewTextSummaryBodyState extends State<NewTextSummaryBody> {
 
   void onEnteringText(NewTextSummaryState state) {
     _textEditingController.text = state.source;
+    _textEditingController.selection = TextSelection.fromPosition(
+      TextPosition(offset: _textEditingController.text.length),
+    );
   }
 
   void onSummarizeBtnClicked(NewTextSummaryState state) {
@@ -106,11 +118,14 @@ class _NewTextSummaryBodyState extends State<NewTextSummaryBody> {
 class _NewTextSummaryInputCard extends StatelessWidget {
   const _NewTextSummaryInputCard({
     Key key,
+    @required FocusNode inputNode,
     @required TextEditingController textEditingController,
-  })  : _textEditingController = textEditingController,
+  })  : _inputNode = inputNode,
+        _textEditingController = textEditingController,
         super(key: key);
 
   final TextEditingController _textEditingController;
+  final FocusNode _inputNode;
 
   @override
   Widget build(BuildContext context) {
@@ -122,6 +137,7 @@ class _NewTextSummaryInputCard extends StatelessWidget {
             expands: true,
             minLines: null,
             maxLines: null,
+            focusNode: _inputNode,
             controller: _textEditingController,
             onChanged: (text) {
               final cubit = BlocProvider.of<NewTextSummaryCubit>(context);
