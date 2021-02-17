@@ -1,0 +1,40 @@
+name: Deploy Android app to Google Play
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  deploy:
+    name: Deploy Android app to Google Play
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v2
+      - name: Decrypt secrets folder
+        run: ./.github/scripts/decrypt_secrets.sh
+        env:
+          SECRETS_GPG_PASSPHRASE: ${{ secrets.JIZT_SECRETS_GPG_PASSPHRASE }}
+      - uses: actions/setup-java@v1
+        with:
+          java-version: '12.x'
+      - uses: subosito/flutter-action@v1 # https://github.com/subosito/flutter-action
+        with:
+          channel: beta
+      - name: Download dependencies
+        run: flutter pub get
+      - name: Build Flutter Android App
+        run: flutter build appbundle --build-number ${{ github.run_number }}
+        env:
+          JIZT_RELEASE_KEY_ALIAS: ${{ secrets.JIZT_RELEASE_KEY_ALIAS }}
+          JIZT_RELEASE_KEY_PASS: ${{ secrets.JIZT_RELEASE_KEY_PASS }}
+          JIZT_RELEASE_KEY_STORE_PASS: ${{ secrets.JIZT_RELEASE_KEY_STORE_PASS }}
+          ANDROID_PUBLISHER_CREDENTIALS: ${{ secrets.ANDROID_PUBLISHER_CREDENTIALS }}
+      - name: Publish app on Google Play
+        working-directory: ./android
+        run: ./gradlew app:publishReleaseBundle --stacktrace
+        env:
+          JIZT_RELEASE_KEY_ALIAS: ${{ secrets.JIZT_RELEASE_KEY_ALIAS }}
+          JIZT_RELEASE_KEY_PASS: ${{ secrets.JIZT_RELEASE_KEY_PASS }}
+          JIZT_RELEASE_KEY_STORE_PASS: ${{ secrets.JIZT_RELEASE_KEY_STORE_PASS }}
+          ANDROID_PUBLISHER_CREDENTIALS: ${{ secrets.ANDROID_PUBLISHER_CREDENTIALS }}
