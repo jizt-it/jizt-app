@@ -10,6 +10,7 @@ ColorSwatch appPalette = ColorSwatch(0xFF5200F5, {
   'secondaryLightColor': Color(0xFFDC51DE),
   'primaryTextColor': Color(0xFFFFFFFF),
   'secondaryTextColor': Colors.grey,
+  'secondaryIconColor': Color(0xFF6C6C86),
   'surfaceColor': Colors.grey.withOpacity(0.15),
 });
 

@@ -2,7 +2,7 @@ import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:jizt/new_text_summary/new_text_summary.dart';
 import 'package:jizt/summaries/summaries.dart';
 import 'package:jizt/summary/summary.dart';
@@ -81,29 +81,36 @@ class _InputTypeSelector extends StatelessWidget {
               style: TextStyle(color: Colors.white),
             ),
             avatar: Icon(
-              Icons.text_snippet,
+              Icons.edit,
               size: 18,
               color: Colors.white,
             ),
             selected: true,
+            onSelected: (bool selected) {},
           ),
           SizedBox(width: 8),
           _InputTypeSelectorChip(
-            label: Text('Twitter'),
-            avatar: SvgPicture.asset(
-              'assets/drawables/ic_twitter.svg',
-              semanticsLabel: 'text',
-              width: 18,
+            label: Text('Document'),
+            avatar: Icon(
+              Icons.text_snippet_outlined,
+              size: 18,
+              color: appPalette['secondaryIconColor'],
             ),
+            onSelected: (bool selected) {
+              Fluttertoast.showToast(msg: "Coming soon!");
+            },
           ),
           SizedBox(width: 8),
           _InputTypeSelectorChip(
             label: Text('Camera'),
-            avatar: SvgPicture.asset(
-              'assets/drawables/ic_camera.svg',
-              semanticsLabel: 'text',
-              width: 18,
+            avatar: Icon(
+              Icons.camera_alt_outlined,
+              size: 18,
+              color: appPalette['secondaryIconColor'],
             ),
+            onSelected: (bool selected) {
+              Fluttertoast.showToast(msg: "Coming soon!");
+            },
           ),
         ],
       ),
@@ -112,16 +119,18 @@ class _InputTypeSelector extends StatelessWidget {
 }
 
 class _InputTypeSelectorChip extends StatelessWidget {
-  const _InputTypeSelectorChip({
-    Key key,
-    this.label,
-    this.avatar,
-    this.selected = false,
-  }) : super(key: key);
+  const _InputTypeSelectorChip(
+      {Key key,
+      this.label,
+      this.avatar,
+      this.selected = false,
+      this.onSelected})
+      : super(key: key);
 
   final Text label;
   final Widget avatar;
   final bool selected;
+  final ValueChanged<bool> onSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -138,7 +147,9 @@ class _InputTypeSelectorChip extends StatelessWidget {
         selected: selected,
         backgroundColor: Colors.transparent,
         selectedColor: appPalette['primaryColor'],
-        onSelected: (bool selected) {},
+        onSelected: (bool selected) {
+          onSelected(selected);
+        },
       ),
     );
   }
