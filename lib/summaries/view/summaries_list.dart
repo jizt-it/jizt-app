@@ -18,7 +18,9 @@ class SummariesList extends StatelessWidget {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(
-              const SnackBar(content: Text('oops try again!')),
+              const SnackBar(
+                  content: Text('Something went wrong. '
+                      'Please try again.')),
             );
         }
       },

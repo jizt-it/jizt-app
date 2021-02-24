@@ -8,6 +8,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:jizt/summary/summary.dart';
 import 'package:share/share.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class SummaryBody extends StatelessWidget {
   SummaryBody({Key key}) : super(key: key);
@@ -21,7 +22,9 @@ class SummaryBody extends StatelessWidget {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(
-              const SnackBar(content: Text('oops try again!')),
+              const SnackBar(
+                  content: Text('Something went wrong. '
+                      'Please try again.')),
             );
         }
       },
@@ -68,12 +71,15 @@ class SummaryBodyCard extends StatelessWidget {
                       onPressed: () => FlutterClipboard.copy(summary.output)
                           .then((_) => Fluttertoast.showToast(msg: "Copied!")),
                     ),
-                    IconButton(
-                      icon: Icon(Icons.share),
-                      tooltip: 'Share',
-                      onPressed: () => Share.share(
-                        '${summary.output}\n\nSummary generated using www.jizt.it',
+                    Visibility(
+                      child: IconButton(
+                        icon: Icon(Icons.share),
+                        tooltip: 'Share',
+                        onPressed: () => Share.share(
+                            '${summary.output}\n\nSummary generated '
+                            'using www.jizt.it'),
                       ),
+                      visible: !kIsWeb, // disable in web version
                     ),
                   ],
                 ),

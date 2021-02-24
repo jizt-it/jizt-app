@@ -110,7 +110,9 @@ class _NewTextSummaryBodyState extends State<NewTextSummaryBody> {
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(
-        const SnackBar(content: Text('oops try again!')),
+        const SnackBar(
+            content: Text('Something went wrong. '
+                'Please try again.')),
       );
   }
 }
