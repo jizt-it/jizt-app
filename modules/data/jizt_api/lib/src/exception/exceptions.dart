@@ -1,5 +1,12 @@
 /// Thrown if an exception occurs while making an `http` request.
-class HttpException implements Exception {}
+class HttpException implements Exception {
+  final String _message;
+
+  const HttpException([String? message]) : _message = message ?? "";
+
+  @override
+  String toString() => _message;
+}
 
 /// Thrown if an `http` request returns a non-20x status code.
 class HttpRequestFailure implements Exception {

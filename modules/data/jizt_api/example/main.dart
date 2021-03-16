@@ -11,7 +11,8 @@ void main() async {
       SummaryRequestDto(source: 'Hello World!'),
     );
     print("Summary id: ${id.summaryId}");
-    final summary = await jiztApi.getSummary(id.summaryId);
+    await Future.delayed(Duration(seconds: 10));
+    final summary = await jiztApi.getSummary(id.summaryId!);
     print("Summary: ${summary.output}");
   } on Exception catch (e) {
     print('Error: $e');

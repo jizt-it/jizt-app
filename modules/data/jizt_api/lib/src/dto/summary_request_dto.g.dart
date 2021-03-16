@@ -8,8 +8,8 @@ part of 'summary_request_dto.dart';
 
 SummaryRequestDto _$SummaryRequestDtoFromJson(Map<String, dynamic> json) {
   return SummaryRequestDto(
-    source: json['source'] as String,
-    model: json['model'] as String,
+    source: json['source'] as String?,
+    model: json['model'] as String?,
     params: json['params'] == null
         ? null
         : SummaryParamsDto.fromJson(json['params'] as Map<String, dynamic>),

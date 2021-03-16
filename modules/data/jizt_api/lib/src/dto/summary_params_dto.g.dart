@@ -8,17 +8,17 @@ part of 'summary_params_dto.dart';
 
 SummaryParamsDto _$SummaryParamsDtoFromJson(Map<String, dynamic> json) {
   return SummaryParamsDto(
-    relativeMaxLength: (json['relative_max_length'] as num)?.toDouble(),
-    relativeMinLength: (json['relative_min_length'] as num)?.toDouble(),
-    doSample: json['do_sample'] as bool,
-    earlyStopping: json['early_stopping'] as bool,
-    numBeams: json['num_beams'] as int,
-    temperature: json['temperature'] as int,
-    topK: json['top_k'] as int,
-    topP: json['top_p'] as int,
-    repetitionPenalty: json['repetition_penalty'] as int,
-    lengthPenalty: json['length_penalty'] as int,
-    noRepeatNgramSize: json['no_repeat_ngram_size'] as int,
+    relativeMaxLength: (json['relative_max_length'] as num?)?.toDouble(),
+    relativeMinLength: (json['relative_min_length'] as num?)?.toDouble(),
+    doSample: json['do_sample'] as bool?,
+    earlyStopping: json['early_stopping'] as bool?,
+    numBeams: json['num_beams'] as int?,
+    temperature: json['temperature'] as int?,
+    topK: json['top_k'] as int?,
+    topP: json['top_p'] as int?,
+    repetitionPenalty: json['repetition_penalty'] as int?,
+    lengthPenalty: json['length_penalty'] as int?,
+    noRepeatNgramSize: json['no_repeat_ngram_size'] as int?,
   );
 }
 

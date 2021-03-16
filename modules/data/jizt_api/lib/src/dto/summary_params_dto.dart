@@ -5,26 +5,26 @@ part 'summary_params_dto.g.dart';
 @JsonSerializable(includeIfNull: false)
 class SummaryParamsDto {
   @JsonKey(name: 'relative_max_length')
-  final double relativeMaxLength;
+  final double? relativeMaxLength;
   @JsonKey(name: 'relative_min_length')
-  final double relativeMinLength;
+  final double? relativeMinLength;
   @JsonKey(name: 'do_sample')
-  final bool doSample;
+  final bool? doSample;
   @JsonKey(name: 'early_stopping')
-  final bool earlyStopping;
+  final bool? earlyStopping;
   @JsonKey(name: 'num_beams')
-  final int numBeams;
-  final int temperature;
+  final int? numBeams;
+  final int? temperature;
   @JsonKey(name: 'top_k')
-  final int topK;
+  final int? topK;
   @JsonKey(name: 'top_p')
-  final int topP;
+  final int? topP;
   @JsonKey(name: 'repetition_penalty')
-  final int repetitionPenalty;
+  final int? repetitionPenalty;
   @JsonKey(name: 'length_penalty')
-  final int lengthPenalty;
+  final int? lengthPenalty;
   @JsonKey(name: 'no_repeat_ngram_size')
-  final int noRepeatNgramSize;
+  final int? noRepeatNgramSize;
 
   SummaryParamsDto({
     this.relativeMaxLength,
