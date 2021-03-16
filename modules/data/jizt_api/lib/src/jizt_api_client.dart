@@ -14,7 +14,7 @@ abstract class JiztApiClient {
 }
 
 class JiztApiClientImpl extends JiztApiClient {
-  JiztApiClientImpl({http.Client httpClient})
+  JiztApiClientImpl({http.Client? httpClient})
       : _httpClient = httpClient ?? http.Client();
 
   static const _baseUrl = 'api.jizt.it';
@@ -35,8 +35,8 @@ class JiztApiClientImpl extends JiztApiClient {
         headers: {"Content-Type": "application/json"},
         body: body,
       );
-    } on Exception {
-      throw HttpException();
+    } on Exception catch (e) {
+      throw HttpException(e.toString());
     }
     print(
         '<-- ${response.statusCode} POST ${uri.toString()}\n${response.body}');

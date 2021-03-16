@@ -6,15 +6,15 @@ part 'summary_dto.g.dart';
 @JsonSerializable(createToJson: false)
 class SummaryDto {
   @JsonKey(name: 'summary_id')
-  final String summaryId;
+  final String? summaryId;
   @JsonKey(name: 'started_at')
-  final DateTime startedAt;
+  final DateTime? startedAt;
   @JsonKey(name: 'ended_at')
-  final DateTime endedAt;
-  final String status;
-  final String output;
-  final String model;
-  final SummaryParamsDto params;
+  final DateTime? endedAt;
+  final String? status;
+  final String? output;
+  final String? model;
+  final SummaryParamsDto? params;
 
   SummaryDto(
       {this.summaryId,
