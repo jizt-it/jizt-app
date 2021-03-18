@@ -26,3 +26,4 @@ jobs:
           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           publish_dir: ./build/web
           force_orphan: true
+          cname: app.jizt.it
