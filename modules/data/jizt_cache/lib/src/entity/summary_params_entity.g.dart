@@ -17,17 +17,17 @@ class SummaryParamsEntityAdapter extends TypeAdapter<SummaryParamsEntity> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return SummaryParamsEntity(
-      relativeMaxLength: fields[0] as double,
-      relativeMinLength: fields[1] as double,
-      doSample: fields[2] as bool,
-      earlyStopping: fields[3] as bool,
-      numBeams: fields[4] as int,
-      temperature: fields[5] as int,
-      topK: fields[6] as int,
-      topP: fields[7] as int,
-      repetitionPenalty: fields[8] as int,
-      lengthPenalty: fields[9] as int,
-      noRepeatNgramSize: fields[10] as int,
+      relativeMaxLength: fields[0] as double?,
+      relativeMinLength: fields[1] as double?,
+      doSample: fields[2] as bool?,
+      earlyStopping: fields[3] as bool?,
+      numBeams: fields[4] as int?,
+      temperature: fields[5] as int?,
+      topK: fields[6] as int?,
+      topP: fields[7] as int?,
+      repetitionPenalty: fields[8] as int?,
+      lengthPenalty: fields[9] as int?,
+      noRepeatNgramSize: fields[10] as int?,
     );
   }
 

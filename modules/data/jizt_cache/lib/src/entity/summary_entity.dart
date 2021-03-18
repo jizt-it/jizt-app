@@ -20,16 +20,16 @@ class SummaryEntity extends HiveObject {
   @HiveField(6)
   final DateTime startedAt;
   @HiveField(7)
-  final DateTime endedAt;
+  final DateTime? endedAt;
 
-  SummaryEntity({
+  SummaryEntity(
     this.id,
     this.source,
     this.model,
     this.params,
     this.status,
     this.output,
-    this.startedAt,
+    this.startedAt, [
     this.endedAt,
-  });
+  ]);
 }

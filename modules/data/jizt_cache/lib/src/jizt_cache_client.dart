@@ -6,9 +6,9 @@ import 'package:rxdart/rxdart.dart';
 abstract class JiztCacheClient {
   Future<void> add(String summaryId, SummaryEntity summaryEntity);
 
-  SummaryEntity get(String summaryId);
+  SummaryEntity? get(String summaryId);
 
-  Stream<SummaryEntity> stream(String summaryId);
+  Stream<SummaryEntity?> stream(String summaryId);
 
   List<SummaryEntity> getAll();
 
@@ -20,7 +20,7 @@ abstract class JiztCacheClient {
 }
 
 class JiztCacheClientImpl extends JiztCacheClient {
-  JiztCacheClientImpl({Box<SummaryEntity> box}) : _box = box;
+  JiztCacheClientImpl(Box<SummaryEntity> box) : _box = box;
 
   final Box<SummaryEntity> _box;
 
@@ -30,12 +30,12 @@ class JiztCacheClientImpl extends JiztCacheClient {
   }
 
   @override
-  SummaryEntity get(String summaryId) {
+  SummaryEntity? get(String summaryId) {
     return _box.get(summaryId);
   }
 
   @override
-  Stream<SummaryEntity> stream(String summaryId) {
+  Stream<SummaryEntity?> stream(String summaryId) {
     return _box
         .watch(key: summaryId)
         .map((_) => get(summaryId))
