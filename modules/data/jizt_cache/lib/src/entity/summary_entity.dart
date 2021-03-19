@@ -22,14 +22,14 @@ class SummaryEntity extends HiveObject {
   @HiveField(7)
   final DateTime? endedAt;
 
-  SummaryEntity(
-    this.id,
-    this.source,
-    this.model,
-    this.params,
-    this.status,
-    this.output,
-    this.startedAt, [
+  SummaryEntity({
+    required this.id,
+    required this.source,
+    required this.model,
+    required this.params,
+    required this.status,
+    required this.output,
+    required this.startedAt,
     this.endedAt,
-  ]);
+  });
 }

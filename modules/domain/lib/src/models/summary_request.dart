@@ -5,5 +5,9 @@ class SummaryRequest {
   final SummaryModel model;
   final SummaryParams params;
 
-  SummaryRequest(this.source, this.model, this.params);
+  SummaryRequest({
+    required this.source,
+    required this.model,
+    required this.params,
+  });
 }
