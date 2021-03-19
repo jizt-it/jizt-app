@@ -8,9 +8,9 @@ class JiztRepositoryImpl extends JiztRepository {
   final JiztCacheClient _jiztCacheClient;
 
   JiztRepositoryImpl({
-    JiztApiClient jiztApiClient,
-    JiztCacheClient jiztCacheClient,
-  })  : _jiztApiClient = jiztApiClient ?? JiztApiClientImpl(),
+    JiztApiClient? jiztApiClient,
+    required JiztCacheClient jiztCacheClient,
+  })   : _jiztApiClient = jiztApiClient ?? JiztApiClientImpl(),
         _jiztCacheClient = jiztCacheClient;
 
   @override
@@ -55,16 +55,15 @@ class JiztRepositoryImpl extends JiztRepository {
     final mapper = SummaryEntityToModelMapper();
     return _jiztCacheClient
         .getAll()
-        .map((summaryEntity) => mapper.map(summaryEntity));
+        .map((summaryEntity) => mapper.map(summaryEntity))
+        .toList(growable: false);
   }
 
   @override
   Stream<List<Summary>> streamAllSummaries() {
     final mapper = SummaryEntityToModelMapper();
     return _jiztCacheClient.streamAll().map((summaryEntities) => summaryEntities
-        .map(
-          (summaryEntity) => mapper.map(summaryEntity),
-        )
+        .map((summaryEntity) => mapper.map(summaryEntity))
         .toList(growable: false));
   }
 

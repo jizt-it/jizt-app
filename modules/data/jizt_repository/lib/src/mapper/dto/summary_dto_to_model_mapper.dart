@@ -6,13 +6,19 @@ class SummaryDtoToModelMapper extends Mapper<SummaryDtoWrapper, Summary> {
   @override
   Summary map(SummaryDtoWrapper input) {
     return Summary(
-      id: input.summaryDto.summaryId,
+      id: input.summaryDto.summaryId ?? "",
       source: input.source,
-      model: SummaryModelDtoToModelMapper().map(input.summaryDto.model),
-      params: SummaryParamsDtoToModelMapper().map(input.summaryDto.params),
-      status: SummaryStatusDtoToModelMapper().map(input.summaryDto.status),
-      output: input.summaryDto.output,
-      startedAt: input.summaryDto.startedAt,
+      model: input.summaryDto.model != null
+          ? SummaryModelDtoToModelMapper().map(input.summaryDto.model!)
+          : SummaryModel.unknown,
+      params: input.summaryDto.params != null
+          ? SummaryParamsDtoToModelMapper().map(input.summaryDto.params!)
+          : SummaryParams(),
+      status: input.summaryDto.status != null
+          ? SummaryStatusDtoToModelMapper().map(input.summaryDto.status!)
+          : SummaryStatus.unknown,
+      output: input.summaryDto.output ?? "",
+      startedAt: input.summaryDto.startedAt ?? DateTime.now(),
       endedAt: input.summaryDto.endedAt,
     );
   }
@@ -22,5 +28,8 @@ class SummaryDtoWrapper {
   final String source;
   final SummaryDto summaryDto;
 
-  SummaryDtoWrapper({this.source, this.summaryDto});
+  SummaryDtoWrapper({
+    required this.source,
+    required this.summaryDto,
+  });
 }

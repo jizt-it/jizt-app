@@ -10,12 +10,8 @@ class SummaryRequestModelToDtoMapper
   SummaryRequestDto map(SummaryRequest input) {
     return SummaryRequestDto(
       source: input.source,
-      model: input.model != null
-          ? SummaryModelModelToDtoMapper().map(input.model)
-          : null,
-      params: input.params != null
-          ? SummaryParamsModelToDtoMapper().map(input.params)
-          : null,
+      model: SummaryModelModelToDtoMapper().map(input.model),
+      params: SummaryParamsModelToDtoMapper().map(input.params),
     );
   }
 }

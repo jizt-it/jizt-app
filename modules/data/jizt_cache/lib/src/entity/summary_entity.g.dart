@@ -17,14 +17,14 @@ class SummaryEntityAdapter extends TypeAdapter<SummaryEntity> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return SummaryEntity(
-      fields[0] as String,
-      fields[1] as String,
-      fields[2] as String,
-      fields[3] as SummaryParamsEntity,
-      fields[4] as String,
-      fields[5] as String,
-      fields[6] as DateTime,
-      fields[7] as DateTime?,
+      id: fields[0] as String,
+      source: fields[1] as String,
+      model: fields[2] as String,
+      params: fields[3] as SummaryParamsEntity,
+      status: fields[4] as String,
+      output: fields[5] as String,
+      startedAt: fields[6] as DateTime,
+      endedAt: fields[7] as DateTime?,
     );
   }
 

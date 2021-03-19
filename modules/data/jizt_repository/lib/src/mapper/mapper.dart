@@ -18,9 +18,9 @@ abstract class Mapper<Input, Output> {
 
 /// Exception thrown if a class cannot be mapped.
 class MappingException implements Exception {
-  String message = "";
+  String message;
 
-  MappingException({this.message});
+  MappingException({this.message = ""});
 
   @override
   String toString() => message;

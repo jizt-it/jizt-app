@@ -6,7 +6,8 @@ class SummaryModelModelToDtoMapper extends Mapper<SummaryModel, String> {
   String map(SummaryModel input) {
     if (input == SummaryModel.t5Large) {
       return "t5-large";
-    } else
+    } else {
       throw MappingException();
+    }
   }
 }
