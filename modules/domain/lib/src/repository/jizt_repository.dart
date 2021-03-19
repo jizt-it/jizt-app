@@ -5,7 +5,7 @@ import 'package:domain/domain.dart';
 abstract class JiztRepository {
   Future<Summary> requestSummary(SummaryRequest request);
 
-  Future<Summary> getSummary(String id);
+  Future<Summary?> getSummary(String id);
 
   Future<List<Summary>> getAllSummaries();
 
