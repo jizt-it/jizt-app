@@ -8,34 +8,26 @@ class Summary extends Comparable<Summary> {
   final SummaryStatus status;
   final String output;
   final DateTime startedAt;
-  final DateTime endedAt;
+  final DateTime? endedAt;
 
-  Summary({
+  Summary(
     this.id,
     this.source,
     this.model,
     this.params,
     this.status,
     this.output,
-    this.startedAt,
+    this.startedAt, [
     this.endedAt,
-  });
+  ]);
 
   int get processingTime {
-    return endedAt.difference(startedAt).inSeconds;
+    return endedAt?.difference(startedAt).inSeconds ?? 0;
   }
 
   @override
   int compareTo(Summary other) {
-    if (startedAt == null && other.startedAt == null) {
-      return 0;
-    } else if (startedAt == null && other.startedAt != null) {
-      return -1;
-    } else if (startedAt != null && other.startedAt == null) {
-      return 1;
-    } else {
-      return startedAt.compareTo(other.startedAt);
-    }
+    return startedAt.compareTo(other.startedAt);
   }
 
   @override
