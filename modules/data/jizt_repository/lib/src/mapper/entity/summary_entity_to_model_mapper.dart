@@ -11,7 +11,7 @@ class SummaryEntityToModelMapper extends Mapper<SummaryEntity, Summary> {
       model: SummaryModelEntityToModelMapper().map(input.model),
       params: SummaryParamsEntityToModelMapper().map(input.params),
       status: SummaryStatusEntityToModelMapper().map(input.status),
-      output: input.output,
+      output: input.output ?? "",
       startedAt: input.startedAt,
       endedAt: input.endedAt,
     );

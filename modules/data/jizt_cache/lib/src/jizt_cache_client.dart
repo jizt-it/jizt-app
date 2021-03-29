@@ -20,7 +20,9 @@ abstract class JiztCacheClient {
 }
 
 class JiztCacheClientImpl extends JiztCacheClient {
-  JiztCacheClientImpl(Box<SummaryEntity> box) : _box = box;
+  JiztCacheClientImpl({
+    required Box<SummaryEntity> box,
+  }) : _box = box;
 
   final Box<SummaryEntity> _box;
 

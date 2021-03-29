@@ -8,10 +8,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  hive: ^2.0.0          # https://pub.dev/packages/hive
+  hive: ^2.0.1          # https://pub.dev/packages/hive
   hive_flutter: ^1.0.0  # https://pub.dev/packages/hive_flutter
   rxdart: ^0.26.0       # https://pub.dev/packages/rxdart
 
 dev_dependencies:
-  hive_generator: ^1.0.0  # https://pub.dev/packages/hive_generator (required by hive)
-  build_runner: ^1.11.5   # https://pub.dev/packages/build_runner (required by hive)
+  hive_generator: ^1.0.1  # https://pub.dev/packages/hive_generator (required by hive)
+  build_runner: ^1.12.2   # https://pub.dev/packages/build_runner (required by hive)

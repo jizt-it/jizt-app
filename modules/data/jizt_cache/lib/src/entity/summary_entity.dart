@@ -16,7 +16,7 @@ class SummaryEntity extends HiveObject {
   @HiveField(4)
   final String status;
   @HiveField(5)
-  final String output;
+  final String? output;
   @HiveField(6)
   final DateTime startedAt;
   @HiveField(7)
@@ -28,7 +28,7 @@ class SummaryEntity extends HiveObject {
     required this.model,
     required this.params,
     required this.status,
-    required this.output,
+    this.output,
     required this.startedAt,
     this.endedAt,
   });

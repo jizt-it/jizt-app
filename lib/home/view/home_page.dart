@@ -27,11 +27,11 @@ class _HomePageState extends State<HomePage> {
   /// Android only for now
   _getSharedText() async {
     if (kIsWeb || !Platform.isAndroid) return;
-    final sharedData = await platform.invokeMethod("getSharedText");
+    final String? sharedData = await platform.invokeMethod("getSharedText");
     _onSharedTextReceived(sharedData);
   }
 
-  void _onSharedTextReceived(String text) {
+  void _onSharedTextReceived(String? text) {
     if (text != null) {
       Navigator.of(context).push<void>(
         NewTextSummaryPage.route(initialText: text),

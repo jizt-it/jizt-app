@@ -4,8 +4,8 @@ import 'package:timeago/timeago.dart' as timeago;
 
 class DateLabel extends StatelessWidget {
   const DateLabel({
-    Key key,
-    @required this.date,
+    Key? key,
+    required this.date,
   }) : super(key: key);
 
   final DateTime date;

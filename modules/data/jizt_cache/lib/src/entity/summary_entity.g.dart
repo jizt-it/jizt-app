@@ -22,7 +22,7 @@ class SummaryEntityAdapter extends TypeAdapter<SummaryEntity> {
       model: fields[2] as String,
       params: fields[3] as SummaryParamsEntity,
       status: fields[4] as String,
-      output: fields[5] as String,
+      output: fields[5] as String?,
       startedAt: fields[6] as DateTime,
       endedAt: fields[7] as DateTime?,
     );

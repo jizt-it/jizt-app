@@ -1,6 +1,7 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:domain/domain.dart';
 import 'package:expandable/expandable.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,10 +9,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:jizt/summary/summary.dart';
 import 'package:share/share.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
 
 class SummaryBody extends StatelessWidget {
-  SummaryBody({Key key}) : super(key: key);
+  SummaryBody({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +41,8 @@ class SummaryBody extends StatelessWidget {
 
 class SummaryBodyCard extends StatelessWidget {
   const SummaryBodyCard({
-    Key key,
-    @required this.summary,
+    Key? key,
+    required this.summary,
   }) : super(key: key);
 
   final Summary summary;
@@ -88,6 +88,7 @@ class SummaryBodyCard extends StatelessWidget {
                     'Original',
                     style: Theme.of(context).textTheme.headline6,
                   ),
+                  collapsed: Container(),
                   expanded: Text(
                     summary.source,
                     softWrap: true,
@@ -102,6 +103,7 @@ class SummaryBodyCard extends StatelessWidget {
                     'More info',
                     style: Theme.of(context).textTheme.headline6,
                   ),
+                  collapsed: Container(),
                   expanded: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -118,10 +120,10 @@ class SummaryBodyCard extends StatelessWidget {
                         softWrap: true,
                       ),
                       Text(
-                        'Relative max length: ${summary.params.relativeMaxLength * 100}%',
+                        'Relative max length: ${(summary.params.relativeMaxLength ?? 0) * 100}%',
                       ),
                       Text(
-                        'Relative min length: ${summary.params.relativeMinLength * 100}%',
+                        'Relative min length: ${(summary.params.relativeMinLength ?? 0) * 100}%',
                       ),
                     ],
                   ),

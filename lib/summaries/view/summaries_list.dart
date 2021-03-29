@@ -8,7 +8,7 @@ import 'package:jizt/theme.dart';
 import 'package:jizt/widgets/date_label.dart';
 
 class SummariesList extends StatelessWidget {
-  SummariesList({Key key}) : super(key: key);
+  SummariesList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -46,8 +46,8 @@ class SummariesList extends StatelessWidget {
 
 class _SummariesListItem extends StatelessWidget {
   const _SummariesListItem({
-    Key key,
-    @required this.summary,
+    Key? key,
+    required this.summary,
   }) : super(key: key);
 
   final Summary summary;
