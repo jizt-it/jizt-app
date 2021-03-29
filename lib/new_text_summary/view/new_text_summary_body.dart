@@ -14,8 +14,8 @@ class NewTextSummaryBody extends StatefulWidget {
 class _NewTextSummaryBodyState extends State<NewTextSummaryBody> {
   final _textEditingController = TextEditingController();
 
-  NewTextSummaryCubit _newTextSummaryCubit;
-  RangeValues _summaryLengthRange;
+  late final NewTextSummaryCubit _newTextSummaryCubit;
+  late RangeValues _summaryLengthRange;
   FocusNode _inputNode = FocusNode();
 
   @override
@@ -91,7 +91,7 @@ class _NewTextSummaryBodyState extends State<NewTextSummaryBody> {
   }
 
   void onSummarizeBtnClicked(NewTextSummaryState state) {
-    FocusManager.instance.primaryFocus.unfocus();
+    FocusManager.instance.primaryFocus?.unfocus();
     _newTextSummaryCubit.requestNewSummary(
       source: _textEditingController.text,
       relativeMaxLength: _summaryLengthRange.end / 100,
@@ -119,10 +119,10 @@ class _NewTextSummaryBodyState extends State<NewTextSummaryBody> {
 
 class _NewTextSummaryInputCard extends StatelessWidget {
   const _NewTextSummaryInputCard({
-    Key key,
-    @required FocusNode inputNode,
-    @required TextEditingController textEditingController,
-  })  : _inputNode = inputNode,
+    Key? key,
+    required FocusNode inputNode,
+    required TextEditingController textEditingController,
+  })   : _inputNode = inputNode,
         _textEditingController = textEditingController,
         super(key: key);
 
@@ -196,7 +196,7 @@ class _PasteButton extends StatelessWidget {
 class SettingsCard extends StatefulWidget {
   final ValueChanged<RangeValues> onChanged;
 
-  SettingsCard({this.onChanged});
+  SettingsCard({required this.onChanged});
 
   @override
   _SettingsCardState createState() => _SettingsCardState();
@@ -306,9 +306,9 @@ class _SettingsCardState extends State<SettingsCard> {
 
 class _NewTextSummaryButton extends StatelessWidget {
   const _NewTextSummaryButton({
-    Key key,
-    @required this.onPressed,
-    @required this.newTextSummaryStatus,
+    Key? key,
+    required this.onPressed,
+    required this.newTextSummaryStatus,
   }) : super(key: key);
 
   final VoidCallback onPressed;

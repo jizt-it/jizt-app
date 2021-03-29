@@ -24,8 +24,8 @@ class NewTextSummaryState extends Equatable {
   const NewTextSummaryState.initial()
       : this._(status: NewTextSummaryStatus.initial);
 
-  const NewTextSummaryState.enteringText({String source})
-      : this._(status: NewTextSummaryStatus.enteringText, source: source);
+  const NewTextSummaryState.enteringText({String? source})
+      : this._(status: NewTextSummaryStatus.enteringText, source: source ?? "");
 
   const NewTextSummaryState.requestingSummary(String source)
       : this._(

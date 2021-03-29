@@ -6,15 +6,15 @@ import 'package:flutter/material.dart';
 /// https://github.com/flutter/flutter/issues/44152
 class PlatformShaderMask extends StatelessWidget {
   const PlatformShaderMask({
-    Key key,
-    this.shaderCallback,
-    this.blendMode,
+    Key? key,
+    required this.shaderCallback,
+    required this.blendMode,
     this.child,
-  });
+  }) : super(key: key);
 
   final ShaderCallback shaderCallback;
   final BlendMode blendMode;
-  final Widget child;
+  final Widget? child;
 
   @override
   Widget build(BuildContext context) {

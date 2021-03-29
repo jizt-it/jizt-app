@@ -6,11 +6,11 @@ import 'package:jizt/new_text_summary/new_text_summary.dart';
 import 'package:jizt/widgets/clouds_background.dart';
 
 class NewTextSummaryPage extends StatelessWidget {
-  const NewTextSummaryPage._({Key key, this.initialText}) : super(key: key);
+  const NewTextSummaryPage._({Key? key, this.initialText}) : super(key: key);
 
-  final String initialText;
+  final String? initialText;
 
-  static Route route({String initialText}) {
+  static Route route({String? initialText}) {
     return MaterialPageRoute<void>(
       builder: (context) => NewTextSummaryPage._(initialText: initialText),
     );
@@ -24,7 +24,7 @@ class NewTextSummaryPage extends StatelessWidget {
           context.read<JiztRepository>(),
         );
         if (initialText != null) {
-          cubit.enteringText(initialText: initialText);
+          cubit.enteringText(initialText: initialText!);
         }
         return cubit;
       },

@@ -14,7 +14,9 @@ class SummaryCubit extends Cubit<SummaryState> {
   Future<void> loadSummary(String summaryId) async {
     try {
       final summary = await _jiztRepository.getSummary(summaryId);
-      emit(SummaryLoadSuccessState(summaryId, summary));
+      if (summary != null) {
+        emit(SummaryLoadSuccessState(summaryId, summary));
+      }
     } catch (e) {
       addError(e);
       emit(SummaryLoadFailureState());

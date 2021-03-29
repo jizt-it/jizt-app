@@ -6,7 +6,7 @@ import 'package:jizt/summary/summary.dart';
 import 'package:jizt/widgets/clouds_background.dart';
 
 class SummaryPage extends StatelessWidget {
-  const SummaryPage._({Key key}) : super(key: key);
+  const SummaryPage._({Key? key}) : super(key: key);
 
   static Route route(String id) {
     return MaterialPageRoute<void>(

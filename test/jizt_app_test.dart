@@ -5,12 +5,6 @@ import 'package:jizt_repository/jizt_repository.dart';
 
 void main() {
   group('JiztApp', () {
-    test(
-        'Given null jiztRepository When JiztApp is instantiated Then AssertionError is thrown',
-        () {
-      expect(() => JiztApp(jiztRepository: null), throwsAssertionError);
-    });
-
     testWidgets(
         'Given non-null jiztRepository When JiztApp is instantiated Then HomePage is rendered',
         (tester) async {

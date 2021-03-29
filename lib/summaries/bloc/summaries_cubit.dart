@@ -8,7 +8,7 @@ part 'summaries_state.dart';
 
 class SummariesCubit extends Cubit<SummariesState> {
   final JiztRepository _jiztRepository;
-  StreamSubscription<List<Summary>> summariesSubscription;
+  late StreamSubscription<List<Summary>> summariesSubscription;
 
   SummariesCubit(this._jiztRepository) : super(SummariesLoadInProgressState());
 

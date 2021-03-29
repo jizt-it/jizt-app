@@ -18,11 +18,11 @@ ColorSwatch appPalette = ColorSwatch(0xFF5200F5, {
 ThemeData get lightTheme {
   final ThemeData base = ThemeData.light();
   final ColorScheme colorScheme = ColorScheme.light(
-    primary: appPalette['primaryColor'],
-    primaryVariant: appPalette['primaryDarkColor'],
-    secondary: appPalette['secondaryColor'],
-    secondaryVariant: appPalette['secondaryDarkColor'],
-    surface: appPalette['surfaceColor'],
+    primary: appPalette['primaryColor']!,
+    primaryVariant: appPalette['primaryDarkColor']!,
+    secondary: appPalette['secondaryColor']!,
+    secondaryVariant: appPalette['secondaryDarkColor']!,
+    surface: appPalette['surfaceColor']!,
     onSecondary: Colors.white,
   );
   return base.copyWith(

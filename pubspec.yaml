@@ -6,7 +6,7 @@ publish_to: 'none'
 version: 0.2.0+0
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -15,23 +15,23 @@ dependencies:
     path: modules/domain
   jizt_repository:
     path: modules/data/jizt_repository
-  flutter_bloc: ^6.1.1                # https://pub.dev/packages/flutter_bloc
-  rxdart: ^0.25.0                     # https://pub.dev/packages/rxdart
-  equatable: ^1.2.5                   # https://pub.dev/packages/equatable
-  flutter_svg: ^0.20.0-nullsafety.3   # https://pub.dev/packages/flutter_svg
-  expandable: ^4.1.4                  # https://pub.dev/packages/expandable
-  share: ^0.6.5+4                     # https://pub.dev/packages/share
-  clipboard: ^0.1.2+8                 # https://pub.dev/packages/clipboard
-  fluttertoast: ^7.1.6                # https://pub.dev/packages/fluttertoast
-  timeago: ^2.0.29                    # https://pub.dev/packages/timeago
-  intl: ^0.16.1                       # https://pub.dev/packages/intl
+  flutter_bloc: ^7.0.0                # https://pub.dev/packages/flutter_bloc
+  rxdart: ^0.26.0                     # https://pub.dev/packages/rxdart
+  equatable: ^2.0.0                   # https://pub.dev/packages/equatable
+  flutter_svg: ^0.21.0-nullsafety.0   # https://pub.dev/packages/flutter_svg
+  expandable: ^5.0.1                  # https://pub.dev/packages/expandable
+  share: ^2.0.1                       # https://pub.dev/packages/share
+  clipboard: ^0.1.3                   # https://pub.dev/packages/clipboard
+  fluttertoast: ^8.0.3                # https://pub.dev/packages/fluttertoast
+  timeago: ^3.0.2                     # https://pub.dev/packages/timeago
+  intl: ^0.17.0                       # https://pub.dev/packages/intl
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   integration_test:
     sdk: flutter
-  bloc_test: ^7.1.0                   # https://pub.dev/packages/bloc_test
+  bloc_test: ^8.0.0                   # https://pub.dev/packages/bloc_test
 
 flutter:
   uses-material-design: true

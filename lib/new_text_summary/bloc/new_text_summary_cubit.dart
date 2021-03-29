@@ -9,19 +9,19 @@ part 'new_text_summary_state.dart';
 
 class NewTextSummaryCubit extends Cubit<NewTextSummaryState> {
   final JiztRepository _jiztRepository;
-  StreamSubscription<Summary> pollerSubscription;
+  late StreamSubscription<Summary?> pollerSubscription;
 
   NewTextSummaryCubit(this._jiztRepository)
       : super(const NewTextSummaryState.initial());
 
-  Future<void> enteringText({String initialText}) async {
+  Future<void> enteringText({String? initialText}) async {
     emit(NewTextSummaryState.enteringText(source: initialText));
   }
 
   Future<void> requestNewSummary({
-    String source,
-    double relativeMaxLength,
-    double relativeMinLength,
+    required String source,
+    required double relativeMaxLength,
+    required double relativeMinLength,
   }) async {
     if ((state.status != NewTextSummaryStatus.enteringText &&
             state.status != NewTextSummaryStatus.failure) ||
@@ -53,14 +53,14 @@ class NewTextSummaryCubit extends Cubit<NewTextSummaryState> {
         .listen((summary) async => await _onNewSummaryStatusReceived(summary));
   }
 
-  Future<void> _onNewSummaryStatusReceived(Summary summary) async {
+  Future<void> _onNewSummaryStatusReceived(Summary? summary) async {
     if (state.status == NewTextSummaryStatus.checkingNewSummaryStatus) {
       return; // Already checking status
     }
     emit(NewTextSummaryState.checkingNewSummaryStatus(
         state.source, state.summaryId));
     final summary = await _jiztRepository.getSummary(state.summaryId);
-    if (summary.status == SummaryStatus.completed) {
+    if (summary?.status == SummaryStatus.completed) {
       pollerSubscription.cancel();
       emit(NewTextSummaryState.success(state.source, state.summaryId));
     } else {

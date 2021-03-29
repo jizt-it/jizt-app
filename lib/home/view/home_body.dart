@@ -12,7 +12,7 @@ import 'package:jizt/widgets/platform_shader_mask.dart';
 
 class HomeBody extends StatelessWidget {
   const HomeBody({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -36,7 +36,7 @@ class HomeBody extends StatelessWidget {
 
 class _HomeHeader extends StatelessWidget {
   const _HomeHeader({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -51,7 +51,7 @@ class _HomeHeader extends StatelessWidget {
             style: Theme.of(context)
                 .textTheme
                 .headline3
-                .copyWith(color: Color(0xFF050081)),
+                ?.copyWith(color: Color(0xFF050081)),
           ),
           Text(
             'Anything to jizt today?',
@@ -65,7 +65,7 @@ class _HomeHeader extends StatelessWidget {
 
 class _InputTypeSelector extends StatelessWidget {
   const _InputTypeSelector({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -120,11 +120,11 @@ class _InputTypeSelector extends StatelessWidget {
 
 class _InputTypeSelectorChip extends StatelessWidget {
   const _InputTypeSelectorChip(
-      {Key key,
-      this.label,
-      this.avatar,
+      {Key? key,
+      required this.label,
+      required this.avatar,
       this.selected = false,
-      this.onSelected})
+      required this.onSelected})
       : super(key: key);
 
   final Text label;
@@ -157,7 +157,7 @@ class _InputTypeSelectorChip extends StatelessWidget {
 
 class _NewTextSummaryCard extends StatelessWidget {
   const _NewTextSummaryCard({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -193,7 +193,7 @@ class _NewTextSummaryCard extends StatelessWidget {
 
 class _SummariesList extends StatelessWidget {
   const _SummariesList({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -215,7 +215,7 @@ class _SummariesList extends StatelessWidget {
                   colors: <Color>[
                     Colors.transparent,
                     Colors.transparent,
-                    appPalette['primaryColor']
+                    appPalette['primaryColor']!
                   ],
                 ).createShader(bounds);
               },
@@ -257,7 +257,7 @@ class _SummariesList extends StatelessWidget {
 
 class _SummariesListHeader extends StatelessWidget {
   const _SummariesListHeader({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -293,8 +293,8 @@ class _SummariesListHeader extends StatelessWidget {
 
 class _SummariesListItem extends StatelessWidget {
   const _SummariesListItem({
-    Key key,
-    this.summary,
+    Key? key,
+    required this.summary,
   }) : super(key: key);
 
   final Summary summary;
