@@ -8,7 +8,6 @@ import 'package:jizt/summaries/summaries.dart';
 import 'package:jizt/summary/summary.dart';
 import 'package:jizt/theme.dart';
 import 'package:jizt/widgets/date_label.dart';
-import 'package:jizt/widgets/platform_shader_mask.dart';
 
 class HomeBody extends StatelessWidget {
   const HomeBody({
@@ -206,7 +205,7 @@ class _SummariesList extends StatelessWidget {
           width: double.infinity,
           child: Container(
             padding: EdgeInsets.only(bottom: 16),
-            child: PlatformShaderMask(
+            child: ShaderMask(
               shaderCallback: (Rect bounds) {
                 return LinearGradient(
                   begin: Alignment.centerLeft,
