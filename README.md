@@ -27,6 +27,21 @@ Jizt makes use of the latest advances in Natural Language Processing (NLP), usin
 
 You can access the project documentation through [docs.jizt.it](https://docs.jizt.it).
 
+## Quick Start
+
+1. Clone the app repository:
+```
+git clone https://github.com/jizt-it/jizt-app.git
+```
+2. Run the code generation tool:
+```
+flutter pub run build_runner build --delete-conflicting-outputs
+```
+3. Compile the app (available environments: `mock`|`dev`|`prod`):
+```
+flutter run --dart-define=JIZT_APP_ENV=dev
+```
+
 ## Contribute
 
 Do you want to contribute to the project? Awesome! At [CONTRIBUTING.md](https://github.com/dmlls/jizt/blob/main/CONTRIBUTING.md) you will find helpful information. Also, if you want to financially support the project, you can do so at [paypal.me/jiztit](https://www.paypal.com/paypalme/jiztit).

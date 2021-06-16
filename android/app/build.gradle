@@ -27,6 +27,19 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
+def dartEnvConfig = [JIZT_APP_ENV: 'dev']
+if (project.hasProperty('dart-defines')) {
+    dartEnvConfig = dartEnvConfig +
+            project.property('dart-defines')
+                    .split(',')
+                    .collectEntries { entry ->
+                        def pair = new String(entry.decodeBase64(), 'UTF-8').split('=')
+                        [(pair.first()): pair.last()]
+                    }
+}
+def appEnv = dartEnvConfig.JIZT_APP_ENV
+def isProdEnv = appEnv == 'prod'
+
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
@@ -47,10 +60,12 @@ android {
 
     defaultConfig {
         applicationId "it.jizt.app"
+        applicationIdSuffix isProdEnv ? '' : appEnv
         minSdkVersion 16
         targetSdkVersion 30
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        resValue "string", "app_name", 'Jizt' + (isProdEnv ? '' : ".$appEnv")
     }
 
     buildTypes {

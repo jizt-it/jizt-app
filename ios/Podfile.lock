@@ -1,0 +1,47 @@
+PODS:
+  - Flutter (1.0.0)
+  - fluttertoast (0.0.2):
+    - Flutter
+    - Toast
+  - integration_test (0.0.1):
+    - Flutter
+  - path_provider (0.0.1):
+    - Flutter
+  - share (0.0.1):
+    - Flutter
+  - Toast (4.0.0)
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
+  - integration_test (from `.symlinks/plugins/integration_test/ios`)
+  - path_provider (from `.symlinks/plugins/path_provider/ios`)
+  - share (from `.symlinks/plugins/share/ios`)
+
+SPEC REPOS:
+  trunk:
+    - Toast
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  fluttertoast:
+    :path: ".symlinks/plugins/fluttertoast/ios"
+  integration_test:
+    :path: ".symlinks/plugins/integration_test/ios"
+  path_provider:
+    :path: ".symlinks/plugins/path_provider/ios"
+  share:
+    :path: ".symlinks/plugins/share/ios"
+
+SPEC CHECKSUMS:
+  Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
+  fluttertoast: 6122fa75143e992b1d3470f61000f591a798cc58
+  integration_test: 6eb66a19f7104200dcfdd62bc0077e1b09686e4f
+  path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
+  share: 0b2c3e82132f5888bccca3351c504d0003b3b410
+  Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
+
+PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
+
+COCOAPODS: 1.10.1

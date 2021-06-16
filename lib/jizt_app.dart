@@ -11,7 +11,7 @@ class JiztApp extends StatelessWidget {
   const JiztApp({
     Key? key,
     required JiztRepository jiztRepository,
-  })   : _jiztRepository = jiztRepository,
+  })  : _jiztRepository = jiztRepository,
         super(key: key);
 
   @override

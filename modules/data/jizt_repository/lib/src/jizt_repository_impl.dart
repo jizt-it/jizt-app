@@ -10,7 +10,7 @@ class JiztRepositoryImpl extends JiztRepository {
   JiztRepositoryImpl({
     JiztApiClient? jiztApiClient,
     required JiztCacheClient jiztCacheClient,
-  })   : _jiztApiClient = jiztApiClient ?? JiztApiClientImpl(),
+  })  : _jiztApiClient = jiztApiClient ?? JiztApiClientImpl(),
         _jiztCacheClient = jiztCacheClient;
 
   @override

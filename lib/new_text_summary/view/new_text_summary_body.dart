@@ -122,7 +122,7 @@ class _NewTextSummaryInputCard extends StatelessWidget {
     Key? key,
     required FocusNode inputNode,
     required TextEditingController textEditingController,
-  })   : _inputNode = inputNode,
+  })  : _inputNode = inputNode,
         _textEditingController = textEditingController,
         super(key: key);
 
