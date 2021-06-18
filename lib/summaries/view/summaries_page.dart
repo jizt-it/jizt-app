@@ -2,6 +2,7 @@ import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jizt/l10n/l10n.dart';
 import 'package:jizt/summaries/summaries.dart';
 import 'package:jizt/widgets/clouds_background.dart';
 
@@ -16,13 +17,14 @@ class SummariesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return BlocProvider(
       create: (context) => SummariesCubit(
         context.read<JiztRepository>(),
       )..loadSummaries(),
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Summaries'),
+          title: Text(l10n.summariesPageTitle),
         ),
         body: Stack(
           children: [

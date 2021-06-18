@@ -2,6 +2,7 @@ import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jizt/l10n/l10n.dart';
 import 'package:jizt/new_text_summary/new_text_summary.dart';
 import 'package:jizt/summary/summary.dart';
 import 'package:jizt/theme.dart';
@@ -107,12 +108,11 @@ class _NewTextSummaryBodyState extends State<NewTextSummaryBody> {
   }
 
   void onSummaryFailure() {
+    final l10n = context.l10n;
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(
-        const SnackBar(
-            content: Text('Something went wrong. '
-                'Please try again.')),
+        SnackBar(content: Text(l10n.allErrorUnknown)),
       );
   }
 }
@@ -131,6 +131,7 @@ class _NewTextSummaryInputCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Hero(
       tag: 'card',
       child: Card(
@@ -150,7 +151,7 @@ class _NewTextSummaryInputCard extends StatelessWidget {
             },
             keyboardType: TextInputType.multiline,
             decoration: InputDecoration(
-              hintText: 'Type or paste your text...',
+              hintText: l10n.newTextSummaryPageCardHint,
               hintStyle: TextStyle(fontSize: 15),
               contentPadding: EdgeInsets.all(16.0),
               border: InputBorder.none,
@@ -169,6 +170,7 @@ class _NewTextSummaryInputCard extends StatelessWidget {
 class _PasteButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return BlocBuilder<NewTextSummaryCubit, NewTextSummaryState>(
       buildWhen: (previous, current) =>
           previous.status == NewTextSummaryStatus.initial ||
@@ -181,7 +183,7 @@ class _PasteButton extends StatelessWidget {
             child: IconButton(
               icon: Icon(Icons.paste),
               iconSize: 16,
-              tooltip: 'Copy',
+              tooltip: l10n.newTextSummaryPageBtnCopy,
               onPressed: () => FlutterClipboard.paste().then((value) => context
                   .read<NewTextSummaryCubit>()
                   .enteringText(initialText: value)),
@@ -214,6 +216,7 @@ class _SettingsCardState extends State<SettingsCard> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Card(
       child: Padding(
         padding: const EdgeInsets.only(
@@ -227,7 +230,7 @@ class _SettingsCardState extends State<SettingsCard> {
             Align(
               alignment: Alignment.topLeft,
               child: Text(
-                'Summary length',
+                l10n.newTextSummaryPageSummaryLength,
                 style: TextStyle(
                   color: appPalette['primaryDarkColor'],
                 ),
@@ -239,7 +242,7 @@ class _SettingsCardState extends State<SettingsCard> {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    '0%',
+                    l10n.newTextSummaryPageSummaryLengthPercentage(0),
                     style: TextStyle(
                       color: appPalette['secondaryTextColor'],
                     ),
@@ -248,7 +251,7 @@ class _SettingsCardState extends State<SettingsCard> {
                 Align(
                   alignment: Alignment.centerRight,
                   child: Text(
-                    '100%',
+                    l10n.newTextSummaryPageSummaryLengthPercentage(100),
                     style: TextStyle(
                       color: appPalette['secondaryTextColor'],
                     ),
@@ -265,8 +268,12 @@ class _SettingsCardState extends State<SettingsCard> {
                     max: 100,
                     divisions: 10,
                     labels: RangeLabels(
-                      '${_summaryLengthRange.start.round()}%',
-                      '${_summaryLengthRange.end.round()}%',
+                      l10n.newTextSummaryPageSummaryLengthPercentage(
+                        _summaryLengthRange.start.round(),
+                      ),
+                      l10n.newTextSummaryPageSummaryLengthPercentage(
+                        _summaryLengthRange.end.round(),
+                      ),
                     ),
                     onChanged: (RangeValues values) {
                       setState(() {
@@ -318,11 +325,12 @@ class _NewTextSummaryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: onPressed,
-      child: _getButtonBody(),
+      child: _getButtonBody(context),
     );
   }
 
-  Widget _getButtonBody() {
+  Widget _getButtonBody(BuildContext context) {
+    final l10n = context.l10n;
     switch (newTextSummaryStatus) {
       case NewTextSummaryStatus.requestingSummary:
       case NewTextSummaryStatus.waitingToCheckNewSummaryStatus:
@@ -338,7 +346,7 @@ class _NewTextSummaryButton extends StatelessWidget {
         );
       default:
         return Text(
-          'Summarize',
+          l10n.newTextSummaryPageBtnSummarize,
           style: TextStyle(fontSize: 20),
         );
     }

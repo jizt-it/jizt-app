@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:jizt/l10n/l10n.dart';
 import 'package:jizt/new_text_summary/new_text_summary.dart';
 import 'package:jizt/summaries/summaries.dart';
 import 'package:jizt/summary/summary.dart';
@@ -40,20 +41,21 @@ class _HomeHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Padding(
       padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Hi there',
+            l10n.homePageTitle,
             style: Theme.of(context)
                 .textTheme
                 .headline3
                 ?.copyWith(color: Color(0xFF050081)),
           ),
           Text(
-            'Anything to jizt today?',
+            l10n.homePageSubtitle,
             style: Theme.of(context).textTheme.headline6,
           ),
         ],
@@ -69,6 +71,7 @@ class _InputTypeSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Row(
@@ -76,7 +79,7 @@ class _InputTypeSelector extends StatelessWidget {
         children: [
           _InputTypeSelectorChip(
             label: Text(
-              'Text',
+              l10n.homePageInputTypeText,
               style: TextStyle(color: Colors.white),
             ),
             avatar: Icon(
@@ -89,26 +92,26 @@ class _InputTypeSelector extends StatelessWidget {
           ),
           SizedBox(width: 8),
           _InputTypeSelectorChip(
-            label: Text('Document'),
+            label: Text(l10n.homePageInputTypeDocument),
             avatar: Icon(
               Icons.text_snippet_outlined,
               size: 18,
               color: appPalette['secondaryIconColor'],
             ),
             onSelected: (bool selected) {
-              Fluttertoast.showToast(msg: "Coming soon!");
+              Fluttertoast.showToast(msg: l10n.homePageInputTypeComingSoon);
             },
           ),
           SizedBox(width: 8),
           _InputTypeSelectorChip(
-            label: Text('Camera'),
+            label: Text(l10n.homePageInputTypeCamera),
             avatar: Icon(
               Icons.camera_alt_outlined,
               size: 18,
               color: appPalette['secondaryIconColor'],
             ),
             onSelected: (bool selected) {
-              Fluttertoast.showToast(msg: "Coming soon!");
+              Fluttertoast.showToast(msg: l10n.homePageInputTypeComingSoon);
             },
           ),
         ],
@@ -161,6 +164,7 @@ class _NewTextSummaryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
@@ -177,7 +181,7 @@ class _NewTextSummaryCard extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Text(
-                    'Type or paste your text...',
+                    l10n.homePageNewTextSummaryCardHint,
                     style: TextStyle(fontSize: 15),
                   ),
                 ),
@@ -197,6 +201,7 @@ class _SummariesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Column(
       children: [
         _SummariesListHeader(),
@@ -237,12 +242,13 @@ class _SummariesList extends StatelessWidget {
                     );
                   } else {
                     return Center(
-                        child: Text(
-                      'You don\'t have any summary yet...',
-                      style: TextStyle(
-                        color: appPalette['secondaryTextColor'],
+                      child: Text(
+                        l10n.homePageSummariesListEmpty,
+                        style: TextStyle(
+                          color: appPalette['secondaryTextColor'],
+                        ),
                       ),
-                    ));
+                    );
                   }
                 },
               ),
@@ -261,12 +267,13 @@ class _SummariesListHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Row(
         children: <Widget>[
           Text(
-            "My Summaries",
+            l10n.homePageSummariesListTitle,
             style: TextStyle(
               fontSize: 17,
               fontWeight: FontWeight.bold,
@@ -274,7 +281,7 @@ class _SummariesListHeader extends StatelessWidget {
           ),
           Spacer(),
           TextButton(
-              child: Text('See all',
+              child: Text(l10n.homePageSummariesListBtnSeeAll,
                   style: TextStyle(
                     fontSize: 12,
                     color: appPalette['secondaryTextColor'],

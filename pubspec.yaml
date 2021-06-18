@@ -11,6 +11,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   domain:
     path: modules/domain
   jizt_repository:
@@ -35,7 +37,7 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-
+  generate: true
   assets:
     - assets/drawables/
   fonts:

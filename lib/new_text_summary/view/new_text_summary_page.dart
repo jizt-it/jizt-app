@@ -2,6 +2,7 @@ import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jizt/l10n/l10n.dart';
 import 'package:jizt/new_text_summary/new_text_summary.dart';
 import 'package:jizt/widgets/clouds_background.dart';
 
@@ -18,6 +19,7 @@ class NewTextSummaryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return BlocProvider(
       create: (context) {
         final cubit = NewTextSummaryCubit(
@@ -30,7 +32,7 @@ class NewTextSummaryPage extends StatelessWidget {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text('New summary'),
+          title: Text(l10n.newTextSummaryPageTitle),
           // actions: [
           //   IconButton(
           //     tooltip: 'Settings',

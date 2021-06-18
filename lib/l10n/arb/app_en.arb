@@ -1,0 +1,69 @@
+{
+  "@@locale": "en",
+  "allErrorUnknown": "Something went wrong. Please try again.",
+  "homePageTitle": "Hi there",
+  "homePageSubtitle": "Anything to jizt today?",
+  "homePageInputTypeText": "Text",
+  "homePageInputTypeDocument": "Document",
+  "homePageInputTypeCamera": "Camera",
+  "homePageInputTypeComingSoon": "Coming soon!",
+  "homePageNewTextSummaryCardHint": "Type or paste your text...",
+  "homePageSummariesListTitle": "My Summaries",
+  "homePageSummariesListBtnSeeAll": "See all",
+  "homePageSummariesListEmpty": "You don't have any summary yet...",
+  "newTextSummaryPageTitle": "New summary",
+  "newTextSummaryPageCardHint": "Type or paste your text...",
+  "newTextSummaryPageBtnCopy": "Copy",
+  "newTextSummaryPageSummaryLength": "Summary length",
+  "newTextSummaryPageSummaryLengthPercentage": "{percentage}%",
+  "@newTextSummaryPageSummaryLengthPercentage": {
+    "placeholders": {
+      "percentage": {}
+    }
+  },
+  "newTextSummaryPageBtnSummarize": "Summarize",
+  "summariesPageTitle": "Summaries",
+  "summaryPageTitle": "Summary",
+  "summaryPageBtnDelete": "Delete summary",
+  "summaryPageBtnCopy": "Copy",
+  "summaryPageCopied": "Copied!",
+  "summaryPageBtnShare": "Share",
+  "summaryPageOutput": "{summary}\\n\\nSummary generated using www.jizt.it",
+  "@summaryPageOutput": {
+    "placeholders": {
+      "summary": {}
+    }
+  },
+  "summaryPageOriginal": "Original",
+  "summaryPageMoreInfo": "More info",
+  "summaryPageDate": "Date: {date}",
+  "@summaryPageDate": {
+    "placeholders": {
+      "date": {}
+    }
+  },
+  "summaryPageProcessingTime": "Processing time: {time}s",
+  "@summaryPageProcessingTime": {
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "summaryPageModel": "Model: {model}",
+  "@summaryPageModel": {
+    "placeholders": {
+      "model": {}
+    }
+  },
+  "summaryRelMaxLength": "Relative max length: {max}%",
+  "@summaryRelMaxLength": {
+    "placeholders": {
+      "max": {}
+    }
+  },
+  "summaryRelMinLength": "Relative min length: {max}%",
+  "@summaryRelMinLength": {
+    "placeholders": {
+      "max": {}
+    }
+  }
+}

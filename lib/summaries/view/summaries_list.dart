@@ -2,6 +2,7 @@ import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jizt/l10n/l10n.dart';
 import 'package:jizt/summaries/summaries.dart';
 import 'package:jizt/summary/summary.dart';
 import 'package:jizt/theme.dart';
@@ -12,16 +13,13 @@ class SummariesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return BlocConsumer<SummariesCubit, SummariesState>(
       listener: (context, state) {
         if (state is SummariesLoadFailureState) {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
-            ..showSnackBar(
-              const SnackBar(
-                  content: Text('Something went wrong. '
-                      'Please try again.')),
-            );
+            ..showSnackBar(SnackBar(content: Text(l10n.allErrorUnknown)));
         }
       },
       builder: (context, state) {

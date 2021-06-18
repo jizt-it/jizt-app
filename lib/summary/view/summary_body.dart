@@ -7,6 +7,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
+import 'package:jizt/l10n/l10n.dart';
 import 'package:jizt/summary/summary.dart';
 import 'package:share/share.dart';
 
@@ -15,17 +16,14 @@ class SummaryBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return BlocConsumer<SummaryCubit, SummaryState>(
       listenWhen: (previous, current) => previous != current,
       listener: (context, state) {
         if (state is SummaryLoadFailureState) {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
-            ..showSnackBar(
-              const SnackBar(
-                  content: Text('Something went wrong. '
-                      'Please try again.')),
-            );
+            ..showSnackBar(SnackBar(content: Text(l10n.allErrorUnknown)));
         }
       },
       builder: (context, state) {
@@ -49,6 +47,7 @@ class SummaryBodyCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return ListView(
       padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
       children: [
@@ -67,17 +66,19 @@ class SummaryBodyCard extends StatelessWidget {
                   children: [
                     IconButton(
                       icon: Icon(Icons.copy),
-                      tooltip: 'Copy',
+                      tooltip: l10n.summaryPageBtnCopy,
                       onPressed: () => FlutterClipboard.copy(summary.output)
-                          .then((_) => Fluttertoast.showToast(msg: "Copied!")),
+                          .then((_) => Fluttertoast.showToast(
+                                msg: l10n.summaryPageCopied,
+                              )),
                     ),
                     Visibility(
                       child: IconButton(
                         icon: Icon(Icons.share),
-                        tooltip: 'Share',
+                        tooltip: l10n.summaryPageBtnShare,
                         onPressed: () => Share.share(
-                            '${summary.output}\n\nSummary generated '
-                            'using www.jizt.it'),
+                          l10n.summaryPageOutput(summary.output),
+                        ),
                       ),
                       visible: !kIsWeb, // disable in web version
                     ),
@@ -85,7 +86,7 @@ class SummaryBodyCard extends StatelessWidget {
                 ),
                 ExpandablePanel(
                   header: Text(
-                    'Original',
+                    l10n.summaryPageOriginal,
                     style: Theme.of(context).textTheme.headline6,
                   ),
                   collapsed: Container(),
@@ -100,7 +101,7 @@ class SummaryBodyCard extends StatelessWidget {
                 ),
                 ExpandablePanel(
                   header: Text(
-                    'More info',
+                    l10n.summaryPageMoreInfo,
                     style: Theme.of(context).textTheme.headline6,
                   ),
                   collapsed: Container(),
@@ -108,22 +109,25 @@ class SummaryBodyCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Date: ${DateFormat('dd/MM/yyyy HH:mm:ss').format(summary.startedAt)}',
+                        l10n.summaryPageDate(DateFormat('dd/MM/yyyy HH:mm:ss')
+                            .format(summary.startedAt)),
                         softWrap: true,
                       ),
                       Text(
-                        'Processing time: ${summary.processingTime}s',
+                        l10n.summaryPageProcessingTime(summary.processingTime),
                         softWrap: true,
                       ),
                       Text(
-                        'Model: ${summary.model.displayName}',
+                        l10n.summaryPageModel(summary.model.displayName),
                         softWrap: true,
                       ),
                       Text(
-                        'Relative max length: ${(summary.params.relativeMaxLength ?? 0) * 100}%',
+                        l10n.summaryRelMaxLength(
+                            (summary.params.relativeMaxLength ?? 0) * 100),
                       ),
                       Text(
-                        'Relative min length: ${(summary.params.relativeMinLength ?? 0) * 100}%',
+                        l10n.summaryRelMinLength(
+                            (summary.params.relativeMinLength ?? 0) * 100),
                       ),
                     ],
                   ),
