@@ -1,15 +1,21 @@
-import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
+import 'dart:async';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jizt_repository/jizt_repository.dart';
 
-import 'jizt_app.dart';
+import 'app/jizt_app.dart';
 import 'utils/bloc_observer.dart';
 
 void main() async {
-  EquatableConfig.stringify = kDebugMode;
+  WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = JiztBlocObserver();
+  FlutterError.onError = (details) {
+    log(details.exceptionAsString());
+    log(details.stack.toString());
+  };
+
   final jiztApiClient = JiztApiClientImpl();
   final jiztCacheClient = JiztCacheClientImpl(
     box: await JiztHiveBoxProvider.getSummariesBox(),
@@ -18,7 +24,12 @@ void main() async {
     jiztApiClient: jiztApiClient,
     jiztCacheClient: jiztCacheClient,
   );
-  runApp(JiztApp(
-    jiztRepository: jiztRepository,
-  ));
+
+  runZonedGuarded(
+    () => runApp(JiztApp(jiztRepository: jiztRepository)),
+    (error, stackTrace) {
+      log(error.toString());
+      log(stackTrace.toString());
+    },
+  );
 }
