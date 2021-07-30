@@ -19,7 +19,7 @@ jobs:
       - name: Download dependencies
         run: flutter pub get
       - name: Build Flutter Web App
-        run: flutter build web --web-renderer canvaskit
+        run: flutter build web --web-renderer canvaskit --dart-define="JIZT_APP_ENV=prod"
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3 # https://github.com/peaceiris/actions-gh-pages
         with:

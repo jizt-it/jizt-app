@@ -24,7 +24,7 @@ jobs:
       - name: Download dependencies
         run: flutter pub get
       - name: Build Flutter Android App
-        run: flutter build appbundle --build-number ${{ github.run_number }}
+        run: flutter build appbundle --build-number=${{ github.run_number }} --dart-define="JIZT_APP_ENV=prod"
         env:
           JIZT_RELEASE_KEY_ALIAS: ${{ secrets.JIZT_RELEASE_KEY_ALIAS }}
           JIZT_RELEASE_KEY_PASS: ${{ secrets.JIZT_RELEASE_KEY_PASS }}
@@ -32,7 +32,7 @@ jobs:
           ANDROID_PUBLISHER_CREDENTIALS: ${{ secrets.ANDROID_PUBLISHER_CREDENTIALS }}
       - name: Publish app on Google Play
         working-directory: ./android
-        run: ./gradlew app:publishReleaseBundle --stacktrace
+        run: ./gradlew app:publishReleaseBundle --artifact-dir ../build/app/outputs/bundle/release/app-release.aab --stacktrace
         env:
           JIZT_RELEASE_KEY_ALIAS: ${{ secrets.JIZT_RELEASE_KEY_ALIAS }}
           JIZT_RELEASE_KEY_PASS: ${{ secrets.JIZT_RELEASE_KEY_PASS }}

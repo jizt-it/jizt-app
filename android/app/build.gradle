@@ -28,7 +28,9 @@ if (flutterVersionName == null) {
 }
 
 def dartEnvConfig = [JIZT_APP_ENV: 'dev']
+println "1: $dartEnvConfig"
 if (project.hasProperty('dart-defines')) {
+    println "2: ${project.property('dart-defines')}"
     dartEnvConfig = dartEnvConfig +
             project.property('dart-defines')
                     .split(',')
@@ -38,7 +40,9 @@ if (project.hasProperty('dart-defines')) {
                     }
 }
 def appEnv = dartEnvConfig.JIZT_APP_ENV
+println "3: ${dartEnvConfig.JIZT_APP_ENV}"
 def isProdEnv = appEnv == 'prod'
+println "4: isProd=$isProdEnv"
 
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 

@@ -37,7 +37,7 @@ ThemeData get lightTheme {
       ),
     ),
     appBarTheme: AppBarTheme(
-      brightness: Brightness.dark,
+      systemOverlayStyle: SystemUiOverlayStyle.dark,
       backgroundColor: Colors.transparent,
       foregroundColor: Colors.transparent,
       elevation: 0.0,

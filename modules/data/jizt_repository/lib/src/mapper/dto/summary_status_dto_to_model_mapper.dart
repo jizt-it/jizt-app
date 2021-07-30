@@ -5,7 +5,7 @@ class SummaryStatusDtoToModelMapper extends Mapper<String, SummaryStatus> {
   @override
   SummaryStatus map(String input) {
     return SummaryStatus.values.firstWhere(
-        (status) => status.toString() == '${(SummaryStatus).toString()}.$input',
+        (status) => status.toString().split('.').last == input,
         orElse: () => SummaryStatus.unknown);
   }
 }
