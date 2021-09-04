@@ -28,7 +28,7 @@
   "summaryPageBtnCopy": "Copy",
   "summaryPageCopied": "Copied!",
   "summaryPageBtnShare": "Share",
-  "summaryPageOutput": "{summary}\\n\\nSummary generated using www.jizt.it",
+  "summaryPageOutput": "{summary}\n\nSummary generated using www.jizt.it",
   "@summaryPageOutput": {
     "placeholders": {
       "summary": {}
