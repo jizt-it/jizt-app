@@ -10,7 +10,7 @@ class JiztMockApiClient extends JiztApiClient {
       summaryId: Random().nextDouble().toString(),
       startedAt: DateTime.now(),
       status: "summarizing",
-      model: "t5-large",
+      model: "t5",
     );
   }
 
@@ -26,7 +26,7 @@ class JiztMockApiClient extends JiztApiClient {
           endedAt: DateTime.now(),
           status: _count == 3 ? 'completed' : 'pending',
           output: _count == 3 ? 'This is the summary with id = $id' : '',
-          model: "t5-large",
+          model: "t5",
           params: SummaryParamsDto(
             relativeMaxLength: 0.4,
             relativeMinLength: 0.1,

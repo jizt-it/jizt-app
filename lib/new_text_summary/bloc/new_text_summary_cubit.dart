@@ -34,7 +34,7 @@ class NewTextSummaryCubit extends Cubit<NewTextSummaryState> {
       final summary = await _jiztRepository.requestSummary(
         SummaryRequest(
             source: source,
-            model: SummaryModel.t5Large,
+            model: SummaryModel.t5,
             params: SummaryParams(
               relativeMaxLength: relativeMaxLength,
               relativeMinLength: relativeMinLength,
