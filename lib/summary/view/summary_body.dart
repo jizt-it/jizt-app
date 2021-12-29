@@ -1,15 +1,13 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:domain/domain.dart';
 import 'package:expandable/expandable.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:jizt/l10n/l10n.dart';
 import 'package:jizt/summary/summary.dart';
-import 'package:share/share.dart';
+import 'package:share_plus/share_plus.dart';
 
 class SummaryBody extends StatelessWidget {
   SummaryBody({Key? key}) : super(key: key);
@@ -72,15 +70,12 @@ class SummaryBodyCard extends StatelessWidget {
                                 msg: l10n.summaryPageCopied,
                               )),
                     ),
-                    Visibility(
-                      child: IconButton(
-                        icon: Icon(Icons.share),
-                        tooltip: l10n.summaryPageBtnShare,
-                        onPressed: () => Share.share(
-                          l10n.summaryPageOutput(summary.output),
-                        ),
+                    IconButton(
+                      icon: Icon(Icons.share),
+                      tooltip: l10n.summaryPageBtnShare,
+                      onPressed: () => Share.share(
+                        l10n.summaryPageOutput(summary.output),
                       ),
-                      visible: !kIsWeb, // disable in web version
                     ),
                   ],
                 ),
