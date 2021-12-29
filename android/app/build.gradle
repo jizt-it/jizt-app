@@ -28,9 +28,9 @@ if (flutterVersionName == null) {
 }
 
 def dartEnvConfig = [JIZT_APP_ENV: 'dev']
-println "1: $dartEnvConfig"
-if (project.hasProperty('dart-defines')) {
-    println "2: ${project.property('dart-defines')}"
+if (project.hasProperty("env")) {
+    dartEnvConfig["JIZT_APP_ENV"] = project.getProperty("env")
+} else if (project.hasProperty('dart-defines')) {
     dartEnvConfig = dartEnvConfig +
             project.property('dart-defines')
                     .split(',')
@@ -40,9 +40,8 @@ if (project.hasProperty('dart-defines')) {
                     }
 }
 def appEnv = dartEnvConfig.JIZT_APP_ENV
-println "3: ${dartEnvConfig.JIZT_APP_ENV}"
 def isProdEnv = appEnv == 'prod'
-println "4: isProd=$isProdEnv"
+println "Environment: ${dartEnvConfig.JIZT_APP_ENV}"
 
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
@@ -104,5 +103,4 @@ play { // https://github.com/Triple-T/gradle-play-publisher
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }

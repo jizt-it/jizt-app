@@ -3,6 +3,7 @@ on:
   push:
     tags:
       - 'v*'
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -32,7 +33,7 @@ jobs:
           ANDROID_PUBLISHER_CREDENTIALS: ${{ secrets.ANDROID_PUBLISHER_CREDENTIALS }}
       - name: Publish app on Google Play
         working-directory: ./android
-        run: ./gradlew app:publishReleaseBundle --artifact-dir ../build/app/outputs/bundle/release/app-release.aab --stacktrace
+        run: ./gradlew app:publishReleaseBundle -Penv=prod --artifact-dir ../build/app/outputs/bundle/release/app-release.aab --stacktrace
         env:
           JIZT_RELEASE_KEY_ALIAS: ${{ secrets.JIZT_RELEASE_KEY_ALIAS }}
           JIZT_RELEASE_KEY_PASS: ${{ secrets.JIZT_RELEASE_KEY_PASS }}

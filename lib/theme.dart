@@ -19,9 +19,9 @@ ThemeData get lightTheme {
   final ThemeData base = ThemeData.light();
   final ColorScheme colorScheme = ColorScheme.light(
     primary: appPalette['primaryColor']!,
-    primaryVariant: appPalette['primaryDarkColor']!,
+    primaryContainer: appPalette['primaryDarkColor']!,
     secondary: appPalette['secondaryColor']!,
-    secondaryVariant: appPalette['secondaryDarkColor']!,
+    secondaryContainer: appPalette['secondaryDarkColor']!,
     surface: appPalette['surfaceColor']!,
     onSecondary: Colors.white,
   );

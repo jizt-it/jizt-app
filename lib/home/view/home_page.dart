@@ -3,7 +3,6 @@ import 'dart:io' show Platform;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:jizt/home/home.dart';
 import 'package:jizt/new_text_summary/new_text_summary.dart';
 import 'package:jizt/widgets/clouds_background.dart';

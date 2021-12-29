@@ -1,6 +1,5 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jizt/l10n/l10n.dart';
 import 'package:jizt/new_text_summary/new_text_summary.dart';
