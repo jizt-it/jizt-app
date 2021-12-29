@@ -2,15 +2,12 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jizt_repository/jizt_repository.dart';
 
 import 'app/jizt_app.dart';
-import 'utils/bloc_observer.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Bloc.observer = JiztBlocObserver();
   FlutterError.onError = (details) {
     log(details.exceptionAsString());
     log(details.stack.toString());

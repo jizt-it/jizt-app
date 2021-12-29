@@ -18,7 +18,7 @@ dependencies:
     path: modules/domain
   jizt_repository:
     path: modules/data/jizt_repository
-  flutter_bloc: ^7.1.0                # https://pub.dev/packages/flutter_bloc
+  flutter_bloc: ^8.0.0                # https://pub.dev/packages/flutter_bloc
   rxdart: ^0.27.3                     # https://pub.dev/packages/rxdart
   equatable: ^2.0.3                   # https://pub.dev/packages/equatable
   flutter_svg: ^1.0.0                 # https://pub.dev/packages/flutter_svg
@@ -34,7 +34,7 @@ dev_dependencies:
     sdk: flutter
   integration_test:
     sdk: flutter
-  bloc_test: ^8.1.0                   # https://pub.dev/packages/bloc_test
+  bloc_test: ^9.0.1                   # https://pub.dev/packages/bloc_test
 
 flutter:
   uses-material-design: true
