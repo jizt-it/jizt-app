@@ -6,7 +6,8 @@ publish_to: 'none'
 version: 0.4.0+0 # Build number set by CICD system
 
 environment:
-  sdk: ">=2.13.0 <3.0.0"
+  sdk: ">=2.15.0 <3.0.0"
+  flutter: ">=2.8.0 <3.0.0"
 
 dependencies:
   flutter:
