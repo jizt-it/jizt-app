@@ -1,7 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    id "com.github.triplet.play" version "3.2.0"
+    id "com.github.triplet.play" version "3.7.0-agp4.2"
 }
 
 def localProperties = new Properties()
@@ -47,7 +47,16 @@ println "4: isProd=$isProdEnv"
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
@@ -66,7 +75,7 @@ android {
         applicationId "it.jizt.app"
         applicationIdSuffix isProdEnv ? '' : appEnv
         minSdkVersion 16
-        targetSdkVersion 30
+        targetSdkVersion 31
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         resValue "string", "app_name", 'Jizt' + (isProdEnv ? '' : ".$appEnv")
