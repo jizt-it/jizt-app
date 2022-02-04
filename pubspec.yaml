@@ -3,11 +3,11 @@ description: Jizt app.
 
 publish_to: 'none'
 
-version: 0.5.0+0 # Build number set by CICD system
+version: 0.6.0+0 # Build number set by CICD system
 
 environment:
-  sdk: ">=2.15.0 <3.0.0"
-  flutter: ">=2.8.0 <3.0.0"
+  sdk: ">=2.16.0 <3.0.0"
+  flutter: ">=2.10.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -18,15 +18,15 @@ dependencies:
     path: modules/domain
   jizt_repository:
     path: modules/data/jizt_repository
-  flutter_bloc: ^8.0.0                # https://pub.dev/packages/flutter_bloc
+  flutter_bloc: ^8.0.1                # https://pub.dev/packages/flutter_bloc
   rxdart: ^0.27.3                     # https://pub.dev/packages/rxdart
   equatable: ^2.0.3                   # https://pub.dev/packages/equatable
-  flutter_svg: ^1.0.0                 # https://pub.dev/packages/flutter_svg
+  flutter_svg: ^1.0.3                 # https://pub.dev/packages/flutter_svg
   expandable: ^5.0.1                  # https://pub.dev/packages/expandable
   share_plus: ^3.0.4                  # https://pub.dev/packages/share_plus
   clipboard: ^0.1.3                   # https://pub.dev/packages/clipboard
   fluttertoast: ^8.0.8                # https://pub.dev/packages/fluttertoast
-  timeago: ^3.1.0                     # https://pub.dev/packages/timeago
+  timeago: ^3.2.1                     # https://pub.dev/packages/timeago
   intl: ^0.17.0                       # https://pub.dev/packages/intl
 
 dev_dependencies:
@@ -34,7 +34,7 @@ dev_dependencies:
     sdk: flutter
   integration_test:
     sdk: flutter
-  bloc_test: ^9.0.1                   # https://pub.dev/packages/bloc_test
+  bloc_test: ^9.0.2                   # https://pub.dev/packages/bloc_test
 
 flutter:
   uses-material-design: true

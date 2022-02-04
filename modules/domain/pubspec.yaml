@@ -1,6 +1,7 @@
 name: domain
 description: Domain layer of Jizt app.
 version: 1.0.0
+publish_to: "none"
 
 environment:
-  sdk: '>=2.15.0 <3.0.0'
+  sdk: ">=2.16.0 <3.0.0"

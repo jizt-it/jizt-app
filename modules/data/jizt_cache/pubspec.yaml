@@ -1,9 +1,10 @@
 name: jizt_cache
 description: Jizt local cache.
 version: 1.0.0
+publish_to: "none"
 
 environment:
-  sdk: '>=2.15.0 <3.0.0'
+  sdk: ">=2.16.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -13,5 +14,5 @@ dependencies:
   rxdart: ^0.27.3       # https://pub.dev/packages/rxdart
 
 dev_dependencies:
-  hive_generator: ^1.1.1  # https://pub.dev/packages/hive_generator (required by hive)
+  hive_generator: ^1.1.2  # https://pub.dev/packages/hive_generator (required by hive)
   build_runner: ^2.1.7    # https://pub.dev/packages/build_runner (required by hive)
