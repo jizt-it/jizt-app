@@ -8,7 +8,7 @@ We are changing cloud provider. Since free time is scarce these days, the servic
 
 <br>
 
-<p align="center"><img width="450" src="https://github.com/jizt-it/jizt-backend/blob/main/docs/source/_static/images/jizt-logo.png" alt="Jizt"></p>
+<a href="https://www.jizt.it"><p align="center"><img width="450" src="https://github.com/jizt-it/jizt-backend/blob/main/docs/source/_static/images/jizt-logo.png" alt="Jizt"></p></a>
 
 <p align="center" display="inline-block">
   <a href="https://github.com/dmlls/jizt-app/actions?query=workflow%3A%22Test+build%22">
