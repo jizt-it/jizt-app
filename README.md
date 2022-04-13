@@ -1,3 +1,13 @@
+### ⚠️ Service currently unavailable
+
+We are changing cloud provider. Since free time is scarce these days, the service will remain unavailable until **Sunday 17<sup>th</sup> April 2022**. Come back after that! ;)
+
+<br>
+
+---
+
+<br>
+
 <p align="center"><img width="400" src="https://github.com/dmlls/jizt/blob/main/img/readme/JIZT-logo.svg" alt="Jizt"></p>
 
 <p align="center" display="inline-block">
